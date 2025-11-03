@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FunZone - Your Ultimate Gaming Destination</title>
+    <title>FunZone - Download Free & Premium Games</title>
+    <!-- Google AdSense - Badilisha na ID yako halisi -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="fun.css">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <img src="logo.jpg" alt="FunZone Logo" class="logo">
-                <span class="brand-name">FunZone</span>
+            <div class="logo">
+                <span class="logo-icon">🎮</span>
+                <span class="logo-text">FunZone</span>
             </div>
-            <div class="nav-menu">
-                <a href="#home" class="nav-link">Home</a> 
-                <a href="p.html" class="shida">about</a>             
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#games" class="nav-link">Games</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
         </div>
     </nav>
@@ -24,17 +28,111 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Welcome to FunZone</h1>
-            <p>Discover amazing games and download them instantly!</p>
+            <h1 class="hero-title">Welcome to FunZone</h1>
+            <p class="hero-subtitle">Download Amazing Games - Free & Premium</p>
+            <a href="#games" class="cta-button">Explore Games</a>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search games by name...">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Games</button>
+                    <button class="filter-btn" data-filter="free">Free Games</button>
+                    <button class="filter-btn" data-filter="premium">Premium Games</button>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Games Section -->
     <section id="games" class="games-section">
         <div class="container">
-            <h2><font color="white">Featured Games</font></h2>
+            <h2 class="section-title">Featured Games</h2>
             <div class="games-grid" id="gamesGrid">
                 <!-- Games will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About FunZone</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>FunZone is your ultimate destination for downloading amazing mobile games. We offer both free and premium games with secure downloads.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🆓</div>
+                            <h3>Free Games</h3>
+                            <p>Download and play instantly without any PIN required</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⭐</div>
+                            <h3>Premium Games</h3>
+                            <p>High-quality games that require PIN - Contact us to get access</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h3>Safe Downloads</h3>
+                            <p>All games are virus-free and tested for your safety</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📱</div>
+                            <h3>Mobile Optimized</h3>
+                            <p>Games optimized for all Android devices</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get Premium Game PINs</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <h3>Call/WhatsApp</h3>
+                            <p>+255 XXX XXX XXX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <div>
+                            <h3>Email</h3>
+                            <p>contact@funzone.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">🕒</span>
+                        <div>
+                            <h3>Available</h3>
+                            <p>24/7 Support</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pin-info">
+                    <h3>How to Get PINs</h3>
+                    <ol>
+                        <li>Find the premium game you want</li>
+                        <li>Contact us via phone or WhatsApp</li>
+                        <li>Receive your PIN instantly</li>
+                        <li>Download and enjoy the game!</li>
+                    </ol>
+                </div>
             </div>
         </div>
     </section>
@@ -42,9 +140,33 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 FunZone. All rights reserved.</p>
+            <p>&copy; 2024 FunZone. All rights reserved. | Safe Gaming Platform</p>
         </div>
     </footer>
+
+    <!-- Ad Popup -->
+    <div id="adPopup" class="ad-popup" style="display: none;">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>Support Our Website</h3>
+                <button class="close-btn" onclick="closeAd()">×</button>
+            </div>
+            <div class="popup-body">
+                <p>🎮 Thank you for downloading! Please support us.</p>
+                <div class="ad-container">
+                    <!-- AdSense Ad will appear here -->
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                <p class="countdown-text">Download will start in <span id="countdown">5</span> seconds</p>
+            </div>
+            <div class="popup-footer">
+                <button class="btn-secondary" onclick="closeAd()">Skip Ad</button>
+                <button class="btn-primary" onclick="proceedDownload()" id="downloadBtn" disabled>Download Now</button>
+            </div>
+        </div>
+    </div>
 
     <script src="fun.js"></script>
 </body>

@@ -1,10 +1,10 @@
-// Sample games data - REPLACE WITH YOUR ACTUAL GAMES FROM MEDIAFIRE
+// Games Data - Badilisha na games zako halisi
 const games = [
     {
         id: 1,
-        name: "Epic Adventure Game",
-        image: "https://via.placeholder.com/500x300/667eea/white?text=Epic+Adventure",
-        description: "Embark on an amazing journey through magical lands - FREE, no PIN required!",
+        name: "Epic Adventure",
+        image: "one.jpg",
+        description: "Embark on an amazing journey through magical lands filled with challenges and treasures.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME1_LINK/file",
         type: "free",
         pinRequired: false
@@ -12,8 +12,8 @@ const games = [
     {
         id: 2,
         name: "Racing Extreme",
-        image: "https://via.placeholder.com/500x300/f093fb/white?text=Racing+Extreme",
-        description: "High-speed racing with stunning graphics - Contact for PIN",
+        image: "logo.jpg", 
+        description: "Experience the thrill of high-speed racing with stunning graphics and realistic physics.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME2_LINK/file",
         type: "premium",
         pinRequired: true
@@ -21,8 +21,8 @@ const games = [
     {
         id: 3,
         name: "Puzzle Master",
-        image: "https://via.placeholder.com/500x300/4ecdc4/white?text=Puzzle+Master",
-        description: "Challenge your brain with mind-bending puzzles - FREE, no PIN",
+        image: "images/game3.jpg",
+        description: "Challenge your brain with hundreds of mind-bending puzzles and brain teasers.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME3_LINK/file",
         type: "free",
         pinRequired: false
@@ -30,17 +30,17 @@ const games = [
     {
         id: 4,
         name: "Space Warriors",
-        image: "https://via.placeholder.com/500x300/ff6b6b/white?text=Space+Warriors",
-        description: "Fight alien invaders in space - Contact for PIN",
+        image: "images/game4.jpg",
+        description: "Fight alien invaders in this action-packed space shooter with amazing visuals.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME4_LINK/file",
-        type: "premium",
+        type: "premium", 
         pinRequired: true
     },
     {
         id: 5,
         name: "Zombie Survival",
-        image: "https://via.placeholder.com/500x300/45b7d1/white?text=Zombie+Survival",
-        description: "Survive zombie apocalypse - FREE, no PIN required!",
+        image: "images/game5.jpg",
+        description: "Survive the zombie apocalypse in this thrilling survival horror game.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME5_LINK/file",
         type: "free",
         pinRequired: false
@@ -48,119 +48,276 @@ const games = [
     {
         id: 6,
         name: "Football Pro 2024",
-        image: "https://via.placeholder.com/500x300/96c93d/white?text=Football+Pro",
-        description: "Realistic football simulation - Contact for PIN",
+        image: "images/game6.jpg",
+        description: "The most realistic football simulation with all your favorite teams and players.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME6_LINK/file",
         type: "premium",
         pinRequired: true
     }
 ];
 
-// Current game to download
+// Global variables
 let currentDownloadGame = null;
+let countdownInterval = null;
+
+// Initialize website when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadGames();
+    initSearch();
+    initFilters();
+    initSmoothScrolling();
+});
 
 // Load games into the grid
 function loadGames() {
     const gamesGrid = document.getElementById('gamesGrid');
-    gamesGrid.innerHTML = ''; // Clear existing games
+    gamesGrid.innerHTML = '';
     
     games.forEach(game => {
-        const gameCard = document.createElement('div');
-        gameCard.className = 'game-card';
+        const gameCard = createGameCard(game);
+        gamesGrid.appendChild(gameCard);
+    });
+}
+
+// Create individual game card
+function createGameCard(game) {
+    const gameCard = document.createElement('div');
+    gameCard.className = 'game-card';
+    
+    const badgeClass = game.type === 'free' ? 'badge-free' : 'badge-premium';
+    const badgeText = game.type === 'free' ? 'FREE' : 'PREMIUM';
+    const noticeClass = game.type === 'free' ? 'notice-free' : 'notice-premium';
+    const noticeText = game.pinRequired ? 
+        '🔒 PIN Required - Contact us to get PIN' : 
+        '✅ No PIN Required - Download & Play!';
+    const buttonText = game.pinRequired ? 'Download (Need PIN)' : 'Download Now';
+    
+    gameCard.innerHTML = `
+        <div class="game-image-container">
+            <img src="${game.image}" alt="${game.name}" class="game-image" onerror="handleImageError(this)">
+            <div class="game-badge ${badgeClass}">${badgeText}</div>
+        </div>
+        <div class="game-content">
+            <h3 class="game-title">${game.name}</h3>
+            <p class="game-description">${game.description}</p>
+            <div class="pin-notice ${noticeClass}">${noticeText}</div>
+            <button class="download-btn" onclick="showAdAndDownload(${game.id})">
+                ${buttonText}
+            </button>
+        </div>
+    `;
+    
+    return gameCard;
+}
+
+// Handle image loading errors
+function handleImageError(img) {
+    console.log(`Image failed to load: ${img.src}`);
+    // You can set a default image here if you want
+    // img.src = 'images/default-game.jpg';
+}
+
+// Initialize search functionality
+function initSearch() {
+    const searchInput = document.getElementById('searchInput');
+    
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        filterAndDisplayGames(searchTerm, getActiveFilter());
+    });
+    
+    // Clear search on escape key
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            this.value = '';
+            filterAndDisplayGames('', getActiveFilter());
+        }
+    });
+}
+
+// Initialize filter buttons
+function initFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Apply filter
+            const filterType = this.getAttribute('data-filter');
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            filterAndDisplayGames(searchTerm, filterType);
+        });
+    });
+}
+
+// Get currently active filter
+function getActiveFilter() {
+    const activeButton = document.querySelector('.filter-btn.active');
+    return activeButton ? activeButton.getAttribute('data-filter') : 'all';
+}
+
+// Filter and display games based on search and filter
+function filterAndDisplayGames(searchTerm, filterType) {
+    let filteredGames = games;
+    
+    // Apply search filter
+    if (searchTerm) {
+        filteredGames = filteredGames.filter(game => 
+            game.name.toLowerCase().includes(searchTerm) || 
+            game.description.toLowerCase().includes(searchTerm)
+        );
+    }
+    
+    // Apply type filter
+    if (filterType !== 'all') {
+        filteredGames = filteredGames.filter(game => game.type === filterType);
+    }
+    
+    displayGames(filteredGames, searchTerm);
+}
+
+// Display filtered games
+function displayGames(gamesToShow, searchTerm = '') {
+    const gamesGrid = document.getElementById('gamesGrid');
+    gamesGrid.innerHTML = '';
+    
+    if (gamesToShow.length === 0) {
+        showNoGamesMessage(searchTerm);
+        return;
+    }
+    
+    gamesToShow.forEach(game => {
+        const gameCard = createGameCard(game);
         
-        // Determine badge color based on game type
-        const badgeColor = game.type === 'free' ? '#28a745' : '#ffc107';
-        const badgeText = game.type === 'free' ? 'FREE' : 'PREMIUM';
-        
-        gameCard.innerHTML = `
-            <div class="game-image-container">
-                <div class="game-image" style="background: linear-gradient(45deg, ${badgeColor}, #667eea)">
-                    <span class="image-text">${game.name}</span>
-                </div>
-                <div class="game-badge" style="background: ${badgeColor}">${badgeText}</div>
-            </div>
-            <div class="game-content">
-                <h3 class="game-title">${game.name}</h3>
-                <p class="game-description">${game.description}</p>
-                ${game.pinRequired ? 
-                    '<p class="pin-notice">🔒 PIN Required - Contact us to get PIN</p>' : 
-                    '<p class="pin-notice">✅ No PIN Required - Download & Play!</p>'
-                }
-                <button class="download-btn" onclick="showAdAndDownload(${game.id})">
-                    ${game.pinRequired ? 'Download (Need PIN)' : 'Download Now'}
-                </button>
-            </div>
-        `;
+        // Highlight search term if present
+        if (searchTerm) {
+            highlightSearchTerm(gameCard, searchTerm);
+        }
         
         gamesGrid.appendChild(gameCard);
     });
 }
 
-// Function to show ad popup before download
-function showAdAndDownload(gameId) {
-    const game = games.find(g => g.id === gameId);
-    currentDownloadGame = game;
+// Show message when no games found
+function showNoGamesMessage(searchTerm) {
+    const gamesGrid = document.getElementById('gamesGrid');
+    const message = searchTerm ? 
+        `No games found for "${searchTerm}"` : 
+        'No games found';
     
-    // Create ad popup
-    const adPopup = document.createElement('div');
-    adPopup.className = 'ad-popup';
-    adPopup.id = 'adPopup';
-    adPopup.innerHTML = `
-        <div class="popup-content">
-            <div class="popup-header">
-                <h3>Support Our Website</h3>
-                <button class="close-btn" onclick="closeAd()">×</button>
-            </div>
-            <div class="popup-ad">
-                <p>🎮 Thanks for downloading! Please support us by watching this ad.</p>
-                <div class="ad-placeholder">
-                    <p>ADVERTISEMENT</p>
-                    <!-- AdSense Ad Unit -->
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID"
-                            crossorigin="anonymous"></script>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
-                         data-ad-slot="1234567890"
-                         data-ad-format="auto"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-                <p class="ad-timer">Download will start in <span id="countdown">5</span> seconds...</p>
-            </div>
-            <div class="popup-footer">
-                <button class="skip-btn" onclick="closeAd()">Skip Ad</button>
-                <button class="continue-btn" onclick="proceedDownload()">Download Now</button>
-            </div>
+    gamesGrid.innerHTML = `
+        <div class="no-games">
+            <div class="sad-emoji">😕</div>
+            <p>${message}</p>
+            <button class="filter-btn" onclick="clearSearch()">Show All Games</button>
         </div>
     `;
+}
+
+// Highlight search term in game cards
+function highlightSearchTerm(gameCard, searchTerm) {
+    const title = gameCard.querySelector('.game-title');
+    const description = gameCard.querySelector('.game-description');
     
-    document.body.appendChild(adPopup);
+    title.innerHTML = highlightText(title.textContent, searchTerm);
+    description.innerHTML = highlightText(description.textContent, searchTerm);
+}
+
+// Highlight text with search term
+function highlightText(text, searchTerm) {
+    if (!searchTerm) return text;
     
-    // Start countdown
+    const regex = new RegExp(`(${escapeRegex(searchTerm)})`, 'gi');
+    return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+}
+
+// Escape special characters for regex
+function escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Clear search and show all games
+function clearSearch() {
+    document.getElementById('searchInput').value = '';
+    
+    // Reset to "All Games" filter
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-filter') === 'all') {
+            btn.classList.add('active');
+        }
+    });
+    
+    loadGames();
+}
+
+// Initialize smooth scrolling for navigation
+function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 80; // Adjust for navbar
+                
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Show ad popup before download
+function showAdAndDownload(gameId) {
+    const game = games.find(g => g.id === gameId);
+    if (!game) return;
+    
+    currentDownloadGame = game;
+    showAdPopup();
+}
+
+// Show ad popup
+function showAdPopup() {
+    const popup = document.getElementById('adPopup');
+    popup.style.display = 'flex';
+    
     startCountdown();
 }
 
-// Countdown timer for ad
+// Start countdown timer
 function startCountdown() {
     let seconds = 15;
     const countdownElement = document.getElementById('countdown');
-    const continueBtn = document.querySelector('.continue-btn');
+    const downloadBtn = document.getElementById('downloadBtn');
     
-    // Disable continue button initially
-    continueBtn.disabled = true;
-    continueBtn.style.opacity = '0.6';
+    // Reset button state
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = `Download Now (${seconds})`;
     
-    const countdownInterval = setInterval(() => {
+    // Clear any existing interval
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+    }
+    
+    countdownInterval = setInterval(() => {
         seconds--;
         countdownElement.textContent = seconds;
+        downloadBtn.textContent = `Download Now (${seconds})`;
         
         if (seconds <= 0) {
             clearInterval(countdownInterval);
-            continueBtn.disabled = false;
-            continueBtn.style.opacity = '1';
-            continueBtn.textContent = 'Download Now';
+            downloadBtn.disabled = false;
+            downloadBtn.textContent = 'Download Now';
         }
     }, 1000);
 }
@@ -168,182 +325,44 @@ function startCountdown() {
 // Close ad popup
 function closeAd() {
     const popup = document.getElementById('adPopup');
-    if (popup) {
-        popup.remove();
+    popup.style.display = 'none';
+    
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
     }
+    
     currentDownloadGame = null;
 }
 
 // Proceed with download after ad
 function proceedDownload() {
-    if (currentDownloadGame) {
-        // Open download link in new tab
-        window.open(currentDownloadGame.downloadLink, '_blank');
-        
-        // Close popup
-        closeAd();
-        
-        // Track download (optional)
-        console.log(`Download started: ${currentDownloadGame.name}`);
+    if (!currentDownloadGame) return;
+    
+    // Open download link
+    window.open(currentDownloadGame.downloadLink, '_blank');
+    
+    // Track download (optional)
+    trackDownload(currentDownloadGame);
+    
+    // Close popup
+    closeAd();
+}
+
+// Track download statistics (optional)
+function trackDownload(game) {
+    console.log(`Download started: ${game.name}`);
+    // Here you can add analytics tracking
+}
+
+// Add search highlight style
+const style = document.createElement('style');
+style.textContent = `
+    .search-highlight {
+        background: #fff3cd;
+        padding: 0.1rem 0.2rem;
+        border-radius: 3px;
+        font-weight: bold;
     }
-}
-
-// Smooth scrolling for navigation links
-function initSmoothScrolling() {
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            // For external links, don't prevent default
-            if (link.getAttribute('href').startsWith('http') || link.getAttribute('href').includes('.html')) {
-                return;
-            }
-            
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            
-            if (targetId.startsWith('#')) {
-                const targetSection = document.querySelector(targetId);
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
-    });
-}
-
-// Filter games by type
-function filterGames(type) {
-    const filteredGames = type === 'all' ? games : games.filter(game => game.type === type);
-    
-    const gamesGrid = document.getElementById('gamesGrid');
-    gamesGrid.innerHTML = '';
-    
-    filteredGames.forEach(game => {
-        const gameCard = document.createElement('div');
-        gameCard.className = 'game-card';
-        
-        const badgeColor = game.type === 'free' ? '#28a745' : '#ffc107';
-        const badgeText = game.type === 'free' ? 'FREE' : 'PREMIUM';
-        
-        gameCard.innerHTML = `
-            <div class="game-image-container">
-                <div class="game-image" style="background: linear-gradient(45deg, ${badgeColor}, #667eea)">
-                    <span class="image-text">${game.name}</span>
-                </div>
-                <div class="game-badge" style="background: ${badgeColor}">${badgeText}</div>
-            </div>
-            <div class="game-content">
-                <h3 class="game-title">${game.name}</h3>
-                <p class="game-description">${game.description}</p>
-                ${game.pinRequired ? 
-                    '<p class="pin-notice">🔒 PIN Required - Contact us to get PIN</p>' : 
-                    '<p class="pin-notice">✅ No PIN Required - Download & Play!</p>'
-                }
-                <button class="download-btn" onclick="showAdAndDownload(${game.id})">
-                    ${game.pinRequired ? 'Download (Need PIN)' : 'Download Now'}
-                </button>
-            </div>
-        `;
-        
-        gamesGrid.appendChild(gameCard);
-    });
-}
-
-// Search games function
-function searchGames() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const filteredGames = games.filter(game => 
-        game.name.toLowerCase().includes(searchTerm) || 
-        game.description.toLowerCase().includes(searchTerm)
-    );
-    
-    const gamesGrid = document.getElementById('gamesGrid');
-    gamesGrid.innerHTML = '';
-    
-    if (filteredGames.length === 0) {
-        gamesGrid.innerHTML = '<div class="no-games"><p>No games found matching your search.</p></div>';
-        return;
-    }
-    
-    filteredGames.forEach(game => {
-        const gameCard = document.createElement('div');
-        gameCard.className = 'game-card';
-        
-        const badgeColor = game.type === 'free' ? '#28a745' : '#ffc107';
-        const badgeText = game.type === 'free' ? 'FREE' : 'PREMIUM';
-        
-        gameCard.innerHTML = `
-            <div class="game-image-container">
-                <div class="game-image" style="background: linear-gradient(45deg, ${badgeColor}, #667eea)">
-                    <span class="image-text">${game.name}</span>
-                </div>
-                <div class="game-badge" style="background: ${badgeColor}">${badgeText}</div>
-            </div>
-            <div class="game-content">
-                <h3 class="game-title">${game.name}</h3>
-                <p class="game-description">${game.description}</p>
-                ${game.pinRequired ? 
-                    '<p class="pin-notice">🔒 PIN Required - Contact us to get PIN</p>' : 
-                    '<p class="pin-notice">✅ No PIN Required - Download & Play!</p>'
-                }
-                <button class="download-btn" onclick="showAdAndDownload(${game.id})">
-                    ${game.pinRequired ? 'Download (Need PIN)' : 'Download Now'}
-                </button>
-            </div>
-        `;
-        
-        gamesGrid.appendChild(gameCard);
-    });
-}
-
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    loadGames();
-    initSmoothScrolling();
-    
-    // Add search functionality if search input exists
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        searchInput.addEventListener('input', searchGames);
-    }
-    
-    // Add filter buttons if they exist
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const filterType = this.getAttribute('data-filter');
-            filterGames(filterType);
-            
-            // Update active filter button
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-});
-
-// Contact form handler
-function handleContactForm(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
-    
-    // Here you would typically send this data to a server
-    console.log('Contact form submitted:', { name, email, message });
-    
-    // Show success message
-    alert('Thank you for your message! We will contact you soon.');
-    event.target.reset();
-}
-
-// Game statistics (optional)
-const gameStats = {
-    totalDownloads: 0,
-    trackDownload: function() {
-        this.totalDownloads++;
-        console.log(`Total downloads: ${this.totalDownloads}`);
-    }
-};
+`;
+document.head.appendChild(style);
