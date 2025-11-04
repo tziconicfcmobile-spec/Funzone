@@ -2,27 +2,27 @@
 const games = [
     {
         id: 1,
-        name: "God of war",
-        image: "war.jpg",
-        description: "god of war end of jeus empire and begin of new champion .",
+        name: "fifa 26",
+        image: "fc.jpg",
+        description: "the most realistic football game with all your favorite team and players",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME1_LINK/file",
         type: "free",
         pinRequired: false
     },
     {
         id: 2,
-        name: "Racing Extreme",
-        image: "logo.jpg", 
-        description: "Experience the thrill of high-speed racing with stunning graphics and realistic physics.",
+        name: "god of war",
+        image: "war.jpg", 
+        description: "Experience the big battle between Zeus and Cletus.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME2_LINK/file",
         type: "premium",
         pinRequired: true
     },
     {
         id: 3,
-        name: "Puzzle Master",
-        image: "images/game3.jpg",
-        description: "Challenge your brain with hundreds of mind-bending puzzles and brain teasers.",
+        name: "mortal Kombat",
+        image: "mortal.png",
+        description: "Challenge your brain by playing different challenge .",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME3_LINK/file",
         type: "free",
         pinRequired: false
@@ -47,17 +47,8 @@ const games = [
     },
     {
         id: 6,
-        name: "mortal Kombat",
-        image: "mortal.png",
-        description: "mortal Kombat the ling of fire and blood.",
-        downloadLink: "https://www.mediafire.com/file/YOUR_GAME5_LINK/file",
-        type: "premium",
-        pinRequired: true
-    },
-    {
-        id: 7,
-        name: "Fc Pro 2025",
-        image: "fc.jpg",
+        name: "Football Pro 2024",
+        image: "images/game6.jpg",
         description: "The most realistic football simulation with all your favorite teams and players.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME6_LINK/file",
         type: "premium",
@@ -295,17 +286,51 @@ function showAdAndDownload(gameId) {
     showAdPopup();
 }
 
-// Show ad popup
+// Show ad popup with Adsterra ad
 function showAdPopup() {
-    const popup = document.getElementById('adPopup');
-    popup.style.display = 'flex';
+    const popup = document.createElement('div');
+    popup.className = 'ad-popup';
+    popup.id = 'adPopup';
     
+    popup.innerHTML = `
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>Support FunZone 🎮</h3>
+                <button class="close-btn" onclick="closeAd()">×</button>
+            </div>
+            <div class="popup-body">
+                <p>Thank you for downloading! Please support our free gaming platform by viewing this ad.</p>
+                
+                <!-- Adsterra Ad Container -->
+                <div class="ad-container">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : '10139350',
+                            'format' : 'iframe',
+                            'height' : 250,
+                            'width' : 300,
+                            'params' : {}
+                        };
+                        document.write('<scr' + 'ipt type="text/javascript" src="//www.otieu.com/4/10139350"></scr' + 'ipt>');
+                    </script>
+                </div>
+                
+                <p class="countdown-text">Download will start automatically in <span id="countdown">5</span> seconds</p>
+            </div>
+            <div class="popup-footer">
+                <button class="btn-secondary" onclick="closeAd()">Skip Download</button>
+                <button class="btn-primary" onclick="proceedDownload()" id="downloadBtn" disabled>Download Now (5)</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(popup);
     startCountdown();
 }
 
 // Start countdown timer
 function startCountdown() {
-    let seconds = 15;
+    let seconds = 5;
     const countdownElement = document.getElementById('countdown');
     const downloadBtn = document.getElementById('downloadBtn');
     
@@ -334,7 +359,9 @@ function startCountdown() {
 // Close ad popup
 function closeAd() {
     const popup = document.getElementById('adPopup');
-    popup.style.display = 'none';
+    if (popup) {
+        popup.remove();
+    }
     
     if (countdownInterval) {
         clearInterval(countdownInterval);
@@ -348,20 +375,14 @@ function closeAd() {
 function proceedDownload() {
     if (!currentDownloadGame) return;
     
-    // Open download link
+    // Open download link in new tab
     window.open(currentDownloadGame.downloadLink, '_blank');
     
     // Track download (optional)
-    trackDownload(currentDownloadGame);
+    console.log(`Download started: ${currentDownloadGame.name}`);
     
     // Close popup
     closeAd();
-}
-
-// Track download statistics (optional)
-function trackDownload(game) {
-    console.log(`Download started: ${game.name}`);
-    // Here you can add analytics tracking
 }
 
 // Add search highlight style
