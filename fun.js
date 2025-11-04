@@ -2,9 +2,9 @@
 const games = [
     {
         id: 1,
-        name: "Epic Adventure",
-        image: "one.jpg",
-        description: "Embark on an amazing journey through magical lands filled with challenges and treasures.",
+        name: "God of war",
+        image: "war.jpg",
+        description: "god of war end of jeus empire and begin of new champion .",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME1_LINK/file",
         type: "free",
         pinRequired: false
@@ -47,8 +47,17 @@ const games = [
     },
     {
         id: 6,
-        name: "Football Pro 2024",
-        image: "images/game6.jpg",
+        name: "mortal Kombat",
+        image: "mortal.png",
+        description: "mortal Kombat the ling of fire and blood.",
+        downloadLink: "https://www.mediafire.com/file/YOUR_GAME5_LINK/file",
+        type: "premium",
+        pinRequired: true
+    },
+    {
+        id: 7,
+        name: "Fc Pro 2025",
+        image: "fc.jpg",
         description: "The most realistic football simulation with all your favorite teams and players.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME6_LINK/file",
         type: "premium",
