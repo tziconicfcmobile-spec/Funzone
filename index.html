@@ -103,20 +103,25 @@
             <h2 class="section-title">Get Premium Game PINs</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <div class="contact-item">
-                        <span class="contact-icon">📞</span>
-                        <div>
-                            <h3>Call/WhatsApp</h3>
-                            <p>+255 671 131 355</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">✉️</span>
-                        <div>
-                            <h3>Email</h3>
-                            <p>contact@funzone.com</p>
-                        </div>
-                    </div>
+                    <!-- BADILISHA CODE YAKO HIVI -->
+<div class="contact-item">
+    <span class="contact-icon">📞</span>
+    <div>
+        <h3>Call/WhatsApp</h3>
+        <button onclick="revealNumber()" class="reveal-btn">
+            🔒 BONYEZA KUONA NAMBA
+        </button>
+        <p id="phoneNumber" style="display:none; color:green;">
+            <font color="black">0671 131 355</font>
+        </p>
+    </div>
+</div>
+
+<script>
+function revealNumber() {
+    document.getElementById("phoneNumber").style.display = "block";
+}
+</script>
                     <div class="contact-item">
                         <span class="contact-icon">🕒</span>
                         <div>
