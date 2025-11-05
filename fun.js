@@ -2,35 +2,35 @@
 const games = [
     {
         id: 1,
-        name: "fifa 26",
-        image: "fc.jpg",
-        description: "the most realistic football game with all your favorite team and players",
-        downloadLink: "https://www.mediafire.com/file/YOUR_GAME1_LINK/file",
+        name: "efootball 25 PPSSPP",
+        image: "e.jpg",
+        description: "Embark on an amazing journey through magical lands filled with challenges and treasures.",
+        downloadLink: "https://www.mediafire.com/file/xet3s2ofesp5do4/eFootball_2026_GAME.zip/file",
         type: "free",
         pinRequired: false
     },
     {
         id: 2,
-        name: "god of war",
-        image: "war.jpg", 
-        description: "Experience the big battle between Zeus and Cletus.",
+        name: "modern combat 4",
+        image: "m.jpg", 
+        description: "Experience the thrill of high-speed racing with stunning graphics and realistic physics.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME2_LINK/file",
-        type: "premium",
-        pinRequired: true
+        type: "free",
+        pinRequired: false
     },
     {
         id: 3,
-        name: "mortal Kombat",
-        image: "mortal.png",
-        description: "Challenge your brain by playing different challenge .",
+        name: "fifa 26",
+        image: "fc.jpg",
+        description: "the most realistic football game with all your favorite team and players .",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME3_LINK/file",
         type: "free",
         pinRequired: false
     },
     {
         id: 4,
-        name: "Space Warriors",
-        image: "images/game4.jpg",
+        name: "mortal combat",
+        image: "mortal.png",
         description: "Fight alien invaders in this action-packed space shooter with amazing visuals.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME4_LINK/file",
         type: "premium", 
@@ -38,8 +38,8 @@ const games = [
     },
     {
         id: 5,
-        name: "Zombie Survival",
-        image: "images/game5.jpg",
+        name: "god of war",
+        image: "war.jpg",
         description: "Survive the zombie apocalypse in this thrilling survival horror game.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME5_LINK/file",
         type: "free",
@@ -48,17 +48,13 @@ const games = [
     {
         id: 6,
         name: "Football Pro 2024",
-        image: "images/game6.jpg",
+        image: "https://via.placeholder.com/300x200/96c93d/ffffff?text=Football+Pro",
         description: "The most realistic football simulation with all your favorite teams and players.",
         downloadLink: "https://www.mediafire.com/file/YOUR_GAME6_LINK/file",
         type: "premium",
         pinRequired: true
     }
 ];
-
-// Global variables
-let currentDownloadGame = null;
-let countdownInterval = null;
 
 // Initialize website when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -90,7 +86,6 @@ function createGameCard(game) {
     const noticeText = game.pinRequired ? 
         '🔒 PIN Required - Contact us to get PIN' : 
         '✅ No PIN Required - Download & Play!';
-    const buttonText = game.pinRequired ? 'Download (Need PIN)' : 'Download Now';
     
     gameCard.innerHTML = `
         <div class="game-image-container">
@@ -101,9 +96,9 @@ function createGameCard(game) {
             <h3 class="game-title">${game.name}</h3>
             <p class="game-description">${game.description}</p>
             <div class="pin-notice ${noticeClass}">${noticeText}</div>
-            <button class="download-btn" onclick="showAdAndDownload(${game.id})">
-                ${buttonText}
-            </button>
+            <a href="${game.downloadLink}" class="download-btn" target="_blank">
+                Download Now
+            </a>
         </div>
     `;
     
@@ -113,26 +108,29 @@ function createGameCard(game) {
 // Handle image loading errors
 function handleImageError(img) {
     console.log(`Image failed to load: ${img.src}`);
-    // You can set a default image here if you want
-    // img.src = 'images/default-game.jpg';
+    // Use a fallback placeholder image
+    img.src = 'https://via.placeholder.com/300x200/667eea/ffffff?text=Game+Image';
+    img.alt = 'Game Image';
 }
 
 // Initialize search functionality
 function initSearch() {
     const searchInput = document.getElementById('searchInput');
     
-    searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase().trim();
-        filterAndDisplayGames(searchTerm, getActiveFilter());
-    });
-    
-    // Clear search on escape key
-    searchInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            this.value = '';
-            filterAndDisplayGames('', getActiveFilter());
-        }
-    });
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            filterAndDisplayGames(searchTerm, getActiveFilter());
+        });
+        
+        // Clear search on escape key
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                this.value = '';
+                filterAndDisplayGames('', getActiveFilter());
+            }
+        });
+    }
 }
 
 // Initialize filter buttons
@@ -182,6 +180,9 @@ function filterAndDisplayGames(searchTerm, filterType) {
 // Display filtered games
 function displayGames(gamesToShow, searchTerm = '') {
     const gamesGrid = document.getElementById('gamesGrid');
+    
+    if (!gamesGrid) return;
+    
     gamesGrid.innerHTML = '';
     
     if (gamesToShow.length === 0) {
@@ -222,8 +223,12 @@ function highlightSearchTerm(gameCard, searchTerm) {
     const title = gameCard.querySelector('.game-title');
     const description = gameCard.querySelector('.game-description');
     
-    title.innerHTML = highlightText(title.textContent, searchTerm);
-    description.innerHTML = highlightText(description.textContent, searchTerm);
+    if (title) {
+        title.innerHTML = highlightText(title.textContent, searchTerm);
+    }
+    if (description) {
+        description.innerHTML = highlightText(description.textContent, searchTerm);
+    }
 }
 
 // Highlight text with search term
@@ -241,7 +246,10 @@ function escapeRegex(string) {
 
 // Clear search and show all games
 function clearSearch() {
-    document.getElementById('searchInput').value = '';
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.value = '';
+    }
     
     // Reset to "All Games" filter
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -266,7 +274,7 @@ function initSmoothScrolling() {
             
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                const offsetTop = targetElement.offsetTop - 80; // Adjust for navbar
+                const offsetTop = targetElement.offsetTop - 80;
                 
                 window.scrollTo({
                     top: offsetTop,
@@ -277,122 +285,37 @@ function initSmoothScrolling() {
     });
 }
 
-// Show ad popup before download
-function showAdAndDownload(gameId) {
-    const game = games.find(g => g.id === gameId);
-    if (!game) return;
+// Simple share function
+function shareWebsite() {
+    const websiteUrl = window.location.href;
+    const shareText = "Check out FunZone - Amazing free and premium mobile games! 🎮 " + websiteUrl;
     
-    currentDownloadGame = game;
-    showAdPopup();
-}
-
-// Show ad popup with Adsterra ad
-function showAdPopup() {
-    const popup = document.createElement('div');
-    popup.className = 'ad-popup';
-    popup.id = 'adPopup';
-    
-    popup.innerHTML = `
-        <div class="popup-content">
-            <div class="popup-header">
-                <h3>Support FunZone 🎮</h3>
-                <button class="close-btn" onclick="closeAd()">×</button>
-            </div>
-            <div class="popup-body">
-                <p>Thank you for downloading! Please support our free gaming platform by viewing this ad.</p>
-                
-                <!-- Adsterra Ad Container -->
-                <div class="ad-container">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : '10139350',
-                            'format' : 'iframe',
-                            'height' : 250,
-                            'width' : 300,
-                            'params' : {}
-                        };
-                        document.write('<scr' + 'ipt type="text/javascript" src="//www.otieu.com/4/10139350"></scr' + 'ipt>');
-                    </script>
-                </div>
-                
-                <p class="countdown-text">Download will start automatically in <span id="countdown">5</span> seconds</p>
-            </div>
-            <div class="popup-footer">
-                <button class="btn-secondary" onclick="closeAd()">Skip Download</button>
-                <button class="btn-primary" onclick="proceedDownload()" id="downloadBtn" disabled>Download Now (5)</button>
-            </div>
-        </div>
-    `;
-    
-    document.body.appendChild(popup);
-    startCountdown();
-}
-
-// Start countdown timer
-function startCountdown() {
-    let seconds = 5;
-    const countdownElement = document.getElementById('countdown');
-    const downloadBtn = document.getElementById('downloadBtn');
-    
-    // Reset button state
-    downloadBtn.disabled = true;
-    downloadBtn.textContent = `Download Now (${seconds})`;
-    
-    // Clear any existing interval
-    if (countdownInterval) {
-        clearInterval(countdownInterval);
+    if (navigator.share) {
+        navigator.share({
+            title: 'FunZone Games',
+            text: shareText,
+            url: websiteUrl
+        });
+    } else {
+        navigator.clipboard.writeText(shareText).then(() => {
+            alert('Link copied to clipboard! 📋\nShare with your friends!');
+        }).catch(() => {
+            // Fallback for older browsers
+            prompt('Copy this link to share:', shareText);
+        });
     }
-    
-    countdownInterval = setInterval(() => {
-        seconds--;
-        countdownElement.textContent = seconds;
-        downloadBtn.textContent = `Download Now (${seconds})`;
-        
-        if (seconds <= 0) {
-            clearInterval(countdownInterval);
-            downloadBtn.disabled = false;
-            downloadBtn.textContent = 'Download Now';
-        }
-    }, 1000);
 }
 
-// Close ad popup
-function closeAd() {
-    const popup = document.getElementById('adPopup');
-    if (popup) {
-        popup.remove();
-    }
-    
-    if (countdownInterval) {
-        clearInterval(countdownInterval);
-        countdownInterval = null;
-    }
-    
-    currentDownloadGame = null;
+// Simple cookie functions (if needed later)
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
 }
 
-// Proceed with download after ad
-function proceedDownload() {
-    if (!currentDownloadGame) return;
-    
-    // Open download link in new tab
-    window.open(currentDownloadGame.downloadLink, '_blank');
-    
-    // Track download (optional)
-    console.log(`Download started: ${currentDownloadGame.name}`);
-    
-    // Close popup
-    closeAd();
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
 }
-
-// Add search highlight style
-const style = document.createElement('style');
-style.textContent = `
-    .search-highlight {
-        background: #fff3cd;
-        padding: 0.1rem 0.2rem;
-        border-radius: 3px;
-        font-weight: bold;
-    }
-`;
-document.head.appendChild(style);

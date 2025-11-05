@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="monetag" content="1bedfcfa305d6f5f9f24187b19ec3d8d">
     <title>FunZone - Download Free & Premium Games</title>
-    <!-- Google AdSense - Badilisha na ID yako halisi -->
-    <script async src="" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="fun.css">
 </head>
 <body>
@@ -62,13 +59,26 @@
         </div>
     </section>
 
+    <!-- Support Section -->
+    <section class="support-section">
+        <div class="container">
+            <div class="support-content">
+                <h2 class="section-title">Support FunZone</h2>
+                <p>Help us continue providing free games by sharing with your friends!</p>
+                <button class="support-btn" onclick="shareWebsite()">
+                    📱 Share with Friends
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
             <h2 class="section-title">About FunZone</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>FunZone is your ultimate destination for downloading amazing mobile games. We offer both free and premium games with secure downloads.</p>
+                    <p>FunZone is your ultimate destination for downloading amazing mobile games. We offer both free and premium games with secure downloads directly from MediaFire.</p>
                     
                     <div class="features-grid">
                         <div class="feature-card">
@@ -103,25 +113,20 @@
             <h2 class="section-title">Get Premium Game PINs</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <!-- BADILISHA CODE YAKO HIVI -->
-<div class="contact-item">
-    <span class="contact-icon">📞</span>
-    <div>
-        <h3>Call/WhatsApp</h3>
-        <button onclick="revealNumber()" class="reveal-btn">
-            🔒 BONYEZA KUONA NAMBA
-        </button>
-        <p id="phoneNumber" style="display:none; color:green;">
-            <font color="black">0671 131 355</font>
-        </p>
-    </div>
-</div>
-
-<script>
-function revealNumber() {
-    document.getElementById("phoneNumber").style.display = "block";
-}
-</script>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <h3>Call/WhatsApp</h3>
+                            <p>+255 XXX XXX XXX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <div>
+                            <h3>Email</h3>
+                            <p>contact@funzone.com</p>
+                        </div>
+                    </div>
                     <div class="contact-item">
                         <span class="contact-icon">🕒</span>
                         <div>
@@ -147,33 +152,32 @@ function revealNumber() {
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 FunZone. All rights reserved. | Safe Gaming Platform</p>
+            <p>Share with friends and enjoy gaming! 🎮</p>
         </div>
     </footer>
 
-    <!-- Ad Popup -->
-    <div id="adPopup" class="ad-popup" style="display: none;">
-        <div class="popup-content">
-            <div class="popup-header">
-                <h3>Support Our Website</h3>
-                <button class="close-btn" onclick="closeAd()">×</button>
-            </div>
-            <div class="popup-body">
-                <p>🎮 Thank you for downloading! Please support us.</p>
-                <div class="ad-container">
-                    <!-- AdSense Ad will appear here -->
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-                <p class="countdown-text">Download will start in <span id="countdown">15</span> seconds</p>
-            </div>
-            <div class="popup-footer">
-                <button class="btn-secondary" onclick="closeAd()">Skip Ad</button>
-                <button class="btn-primary" onclick="proceedDownload()" id="downloadBtn" disabled>Download Now</button>
-            </div>
-        </div>
-    </div>
-
     <script src="fun.js"></script>
+    
+    <script>
+        // Simple share function
+        function shareWebsite() {
+            const websiteUrl = window.location.href;
+            const shareText = "Check out FunZone - Amazing free and premium mobile games! 🎮 " + websiteUrl;
+            
+            if (navigator.share) {
+                // For mobile devices
+                navigator.share({
+                    title: 'FunZone Games',
+                    text: shareText,
+                    url: websiteUrl
+                });
+            } else {
+                // For desktop - copy to clipboard
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('Link copied to clipboard! 📋\nShare with your friends!');
+                });
+            }
+        }
+    </script>
 </body>
 </html>

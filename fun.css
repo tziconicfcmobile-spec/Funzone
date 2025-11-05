@@ -327,6 +327,8 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
 }
 
 .download-btn:hover {
@@ -458,157 +460,6 @@ body {
     padding: 2rem 0;
 }
 
-/* Ad Popup Styles */
-.ad-popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    backdrop-filter: blur(5px);
-}
-
-.popup-content {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    animation: popupSlide 0.3s ease;
-    border: 2px solid #667eea;
-}
-
-@keyframes popupSlide {
-    from {
-        opacity: 0;
-        transform: scale(0.8) translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-.popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-.popup-header h3 {
-    color: #333;
-    margin: 0;
-    font-size: 1.5rem;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #666;
-    line-height: 1;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.close-btn:hover {
-    background: #f0f0f0;
-    color: #ff6b6b;
-}
-
-.popup-body {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.popup-body p {
-    margin-bottom: 1.5rem;
-    color: #666;
-    line-height: 1.6;
-    font-size: 1.1rem;
-}
-
-.ad-container {
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin: 1.5rem 0;
-    border: 2px dashed #ddd;
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.countdown-text {
-    font-weight: bold;
-    color: #667eea;
-    font-size: 1.1rem;
-    margin-top: 1rem;
-}
-
-.popup-footer {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.btn-primary, .btn-secondary {
-    flex: 1;
-    padding: 1rem 1.5rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-}
-
-.btn-primary:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-}
-
-.btn-primary:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none !important;
-}
-
-.btn-secondary {
-    background: #6c757d;
-    color: white;
-    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
-}
-
-.btn-secondary:hover {
-    background: #5a6268;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
-}
-
 /* No Games Message */
 .no-games {
     grid-column: 1 / -1;
@@ -632,6 +483,36 @@ body {
     padding: 0.1rem 0.2rem;
     border-radius: 3px;
     font-weight: bold;
+}
+
+/* Support Section */
+.support-section {
+    background: #f8f9fa;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.support-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.support-btn {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
+.support-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
 }
 
 /* Responsive Design */
@@ -678,20 +559,6 @@ body {
     .features-grid {
         grid-template-columns: 1fr;
     }
-
-    .popup-footer {
-        flex-direction: column;
-    }
-    
-    .popup-content {
-        padding: 1.5rem;
-        margin: 1rem;
-    }
-    
-    .ad-container {
-        min-height: 250px;
-        padding: 1rem;
-    }
 }
 
 @media (max-width: 480px) {
@@ -711,11 +578,12 @@ body {
         margin: 0 10px;
     }
     
-    .popup-header h3 {
-        font-size: 1.3rem;
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
     }
     
-    .popup-body p {
-        font-size: 1rem;
+    .contact-icon {
+        font-size: 1.5rem;
     }
 }
