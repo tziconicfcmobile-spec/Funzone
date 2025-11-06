@@ -23,7 +23,7 @@ const games = [
         name: "UFC 5 PPSSPP",
         image: "u.jpg",
         description: "ufc 5 | OFFLINE | PPSSPP EMULATOR .",
-        downloadLink: "https://www.mediafire.com/file/YOUR_GAME6_LINK/file",
+        downloadLink: "https://www.mediafire.com/file/lzfbfs7irv0w2f8/UFC_5_PSP_BY_FUNZONE.7z/file",
         type: "premium",
         pinRequired: true
     },
