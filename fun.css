@@ -315,9 +315,14 @@ body {
     border: 1px solid #ffeaa7;
 }
 
+.game-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
 .download-btn {
-    display: block;
-    width: 100%;
+    flex: 2;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 1rem 1.5rem;
@@ -331,9 +336,26 @@ body {
     text-align: center;
 }
 
+.share-btn {
+    flex: 1;
+    background: #6c757d;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
 .download-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.share-btn:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
 }
 
 /* About Section */
@@ -460,31 +482,6 @@ body {
     padding: 2rem 0;
 }
 
-/* No Games Message */
-.no-games {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 4rem 2rem;
-    color: #666;
-}
-
-.no-games .sad-emoji {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.no-games p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-}
-
-.search-highlight {
-    background: #fff3cd;
-    padding: 0.1rem 0.2rem;
-    border-radius: 3px;
-    font-weight: bold;
-}
-
 /* Support Section */
 .support-section {
     background: #f8f9fa;
@@ -513,6 +510,39 @@ body {
 .support-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
+
+/* No Games Message */
+.no-games {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+}
+
+.no-games .sad-emoji {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.no-games p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-highlight {
+    background: #fff3cd;
+    padding: 0.1rem 0.2rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* Game Highlight */
+.game-highlight {
+    box-shadow: 0 0 0 3px #667eea, 0 10px 30px rgba(0,0,0,0.2) !important;
+    border: 2px solid #667eea !important;
+    transform: scale(1.02) !important;
+    transition: all 0.3s ease !important;
 }
 
 /* Responsive Design */
@@ -558,6 +588,10 @@ body {
 
     .features-grid {
         grid-template-columns: 1fr;
+    }
+
+    .game-actions {
+        flex-direction: column;
     }
 }
 
