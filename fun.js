@@ -2,9 +2,9 @@
 const games = [
     {
         id: 1,
-        name: "efootball 25 PPSSPP",
+        name: "efootball 26 PPSSPP",
         image: "e.jpg",
-        description: "efootball 25 | offline game | PPSSPP EMULATOR.",
+        description: "efootball 26 | offline game | PPSSPP EMULATOR.",
         downloadLink: "https://www.mediafire.com/file/xet3s2ofesp5do4/eFootball_2026_GAME.zip/file",
         type: "free",
         pinRequired: false
@@ -19,6 +19,15 @@ const games = [
         pinRequired: true
     },
     {
+        id: 5,
+        name: "bright memory infinite",
+        image: "bright.jpg",
+        description: "download for free action game .",
+        downloadLink: "https://www.mediafire.com/file/jl6mdl8sftoe9ec/bright-memory-infinite-1.31-mod-menu-5play.7z/file",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 3,
         name: "UFC 5 PPSSPP",
         image: "u.jpg",
@@ -27,8 +36,17 @@ const games = [
         type: "premium",
         pinRequired: true
     },
-    {
+     {
         id: 4,
+        name: "pinodeire world bus",
+        image: "bus.jpg",
+        description: "Enjoy game Kali la basi la Tanzania mod ambalo Lina mabasi yote na ramani halisi .",
+        downloadLink: "https://www.mediafire.com/file/6z2v4l72dt6dhzj/pinodeire_World_bus_by_funzone.7z/file",
+        type: "premium",
+        pinRequired: true
+    },
+    {
+        id: 5,
         name: "fifa 26",
         image: "fc.jpg",
         description: "the most realistic football game with all your favorite team and players .",
@@ -37,7 +55,7 @@ const games = [
         pinRequired: false
     },
     {
-        id: 5,
+        id: 6,
         name: "mortal combat",
         image: "mortal.png",
         description: "Fight alien invaders in this action-packed space shooter with amazing visuals.",
@@ -45,8 +63,9 @@ const games = [
         type: "premium", 
         pinRequired: true
     },
+   
     {
-        id: 6,
+        id: 7,
         name: "god of war",
         image: "war.jpg",
         description: "Survive the zombie apocalypse in this thrilling survival horror game.",
@@ -55,7 +74,7 @@ const games = [
         pinRequired: false
     },
     {
-        id: 7,
+        id: 8,
         name: "modern combat 4",
         image: "m.jpg",
         description: "game kali la kivita",
