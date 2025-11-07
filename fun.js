@@ -19,7 +19,7 @@ const games = [
         pinRequired: true
     },
     {
-        id: 5,
+        id: 3,
         name: "bright memory infinite",
         image: "bright.jpg",
         description: "download for free action game .",
@@ -28,7 +28,7 @@ const games = [
         pinRequired: false
     },
     {
-        id: 3,
+        id: 4,
         name: "UFC 5 PPSSPP",
         image: "u.jpg",
         description: "ufc 5 | OFFLINE | PPSSPP EMULATOR .",
@@ -37,7 +37,7 @@ const games = [
         pinRequired: true
     },
      {
-        id: 4,
+        id: 5,
         name: "pinodeire world bus",
         image: "bus.jpg",
         description: "Enjoy game Kali la basi la Tanzania mod ambalo Lina mabasi yote na ramani halisi .",
@@ -46,7 +46,7 @@ const games = [
         pinRequired: true
     },
     {
-        id: 5,
+        id: 6,
         name: "fifa 26",
         image: "fc.jpg",
         description: "the most realistic football game with all your favorite team and players .",
@@ -55,7 +55,7 @@ const games = [
         pinRequired: false
     },
     {
-        id: 6,
+        id: 7,
         name: "mortal combat",
         image: "mortal.png",
         description: "Fight alien invaders in this action-packed space shooter with amazing visuals.",
@@ -65,7 +65,7 @@ const games = [
     },
    
     {
-        id: 7,
+        id: 8,
         name: "god of war",
         image: "war.jpg",
         description: "Survive the zombie apocalypse in this thrilling survival horror game.",
@@ -74,7 +74,7 @@ const games = [
         pinRequired: false
     },
     {
-        id: 8,
+        id: 9,
         name: "modern combat 4",
         image: "m.jpg",
         description: "game kali la kivita",
