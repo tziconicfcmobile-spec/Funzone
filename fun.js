@@ -19,16 +19,16 @@ const games = [
         pinRequired: true
     },
     {
-        id: 3,
+        id: 4,
         name: "bright memory infinite",
-        image: "bright.jpg",
+        image: "b.png",
         description: "download for free action game .",
         downloadLink: "https://www.mediafire.com/file/jl6mdl8sftoe9ec/bright-memory-infinite-1.31-mod-menu-5play.7z/file",
         type: "free",
         pinRequired: false
     },
     {
-        id: 4,
+        id: 3,
         name: "UFC 5 PPSSPP",
         image: "u.jpg",
         description: "ufc 5 | OFFLINE | PPSSPP EMULATOR .",
