@@ -13,7 +13,7 @@ const games = [
         id: 2,
         name: "fts 25 nbc mod",
         image: "fts.jpg",
-        description: "game la mpira la fts la nbc la 2025 timu na jezi zote zipo.",
+        description: "game la mpira la fts la nbc la 2025 timu na jezi zote zipo, wasiliana nasi kupata pin .",
         downloadLink: "https://www.mediafire.com/file/2kau0ceh13ycxtv/FTS_25_NBC.7z/file",
         type: "premium",
         pinRequired: true
@@ -31,7 +31,7 @@ const games = [
         id: 3,
         name: "UFC 5 PPSSPP",
         image: "u.jpg",
-        description: "ufc 5 | OFFLINE | PPSSPP EMULATOR .",
+        description: "ufc 5 | OFFLINE | PPSSPP EMULATOR, wasiliana nasi kupata pin .",
         downloadLink: "https://www.mediafire.com/file/lzfbfs7irv0w2f8/UFC_5_PSP_BY_FUNZONE.7z/file",
         type: "premium",
         pinRequired: true
@@ -49,30 +49,30 @@ const games = [
         id: 4,
         name: "pinodeire world bus",
         image: "bus.jpg",
-        description: "Enjoy game Kali la basi la Tanzania mod ambalo Lina mabasi yote na ramani halisi .",
+        description: "Enjoy game Kali la basi la Tanzania mod ambalo Lina mabasi yote na ramani halisi wasiliana nasi kupata pin.",
         downloadLink: "https://www.mediafire.com/file/6z2v4l72dt6dhzj/pinodeire_World_bus_by_funzone.7z/file",
         type: "premium",
         pinRequired: true
     },
-    {
-        id: 10,
-        name: "dfl 26",
-        image: "dfl.jpg",
-        description: "not yet for download .",
-        downloadLink: "dfl.html",
-        type: "free",
-        pinRequired: false
-    },   
+       
     {
         id: 6,
         name: "mortal combat",
         image: "mortal.png",
-        description: "not yet for download .",
-        downloadLink: "",
-        type: "premium", 
+        description: " .",
+        downloadLink: " download na huenjoy game lako la mortal kombat",
+        type: "free", 
+        pinRequired: false
+    },
+     {
+        id: 10,
+        name: "dfl 26",
+        image: "dfl.jpg",
+        description: ".game Kali la dfl wasiliana nasi kupata pin",
+        downloadLink: "dfl.html",
+        type: "premium",
         pinRequired: true
     },
-     
     {
         id: 7,
         name: "god of war 1",
@@ -86,10 +86,28 @@ const games = [
         id: 8,
         name: "fifa 26",
         image: "fc.jpg",
-        description: "not yet for download ",
+        description: " game la fifa 26download na huenjoy  ",
         downloadLink:"fifa.html",
-        type: "premium",
-        pinRequired: true
+        type: "free",
+        pinRequired: false
+    },
+    {
+        id: 11,
+        name: "dls 26 mod fc 26",
+        image: "dls.jpg",
+        description: "download and play your favorite football game dls 26 mod fc 26 | offline |",
+        downloadLink:"https://www.mediafire.com/file/fcn4gxlcdnb1zxr/DLS_26_MOD_FC_26.zip/file?dkey=g7mnepfhe8p&r=1083",
+        type: "free",
+        pinRequired: false
+    },
+    {
+        id: 12,
+        name: "GTA San Andreas",
+        image: "gta.jpg",
+        description: "download and enjoy the most beautiful GTA games of all time",
+        downloadLink:"https://www.mediafire.com/file/041u4yh2l4l79kl/GTA_San_Andreas_Mod_2.11.277-RisTechy.com.apk/file",
+        type: "free",
+        pinRequired: false
     },
     
 ];
@@ -331,7 +349,7 @@ function handleDirectGameLinks() {
     if (hash) {
         const gameId = parseInt(hash.replace('#game-', ''));
         
-        if (!isNaN(gameId) && gameId >= 1 && gameId <= 6) {
+        if (!isNaN(gameId) && gameId >= 1 && gameId <= 60) {
             setTimeout(() => {
                 const gamesSection = document.getElementById('games');
                 if (gamesSection) {
