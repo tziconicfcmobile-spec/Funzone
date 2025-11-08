@@ -19,6 +19,15 @@ const games = [
         pinRequired: true
     },
     {
+        id: 5,
+        name: "bright memory infinite",
+        image: "b.png",
+        description: "the most action game download and play for free .",
+        downloadLink: "https://www.mediafire.com/file/jl6mdl8sftoe9ec/bright-memory-infinite-1.31-mod-menu-5play.7z/file",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 3,
         name: "UFC 5 PPSSPP",
         image: "u.jpg",
@@ -26,6 +35,15 @@ const games = [
         downloadLink: "https://www.mediafire.com/file/lzfbfs7irv0w2f8/UFC_5_PSP_BY_FUNZONE.7z/file",
         type: "premium",
         pinRequired: true
+    },
+    {
+        id: 9,
+        name: "god hand",
+        image: "hand.jpg",
+        description: "god hand.",
+        downloadLink: "https://www.mediafire.com/file/9gefs9uyr0o5co7/GOD+HAND+HACK+EDITION.iso/file",
+        type: "free",
+        pinRequired: false
     },
      {
         id: 4,
@@ -37,30 +55,30 @@ const games = [
         pinRequired: true
     },
     {
-        id: 5,
-        name: "bright memory infinite",
-        image: "b.png",
-        description: "the most action game download and play for free .",
-        downloadLink: "https://www.mediafire.com/file/jl6mdl8sftoe9ec/bright-memory-infinite-1.31-mod-menu-5play.7z/file",
+        id: 10,
+        name: "dfl 26",
+        image: "dfl.jpg",
+        description: "not yet for download .",
+        downloadLink: "dfl.html",
         type: "free",
         pinRequired: false
-    },
+    },   
     {
         id: 6,
         name: "mortal combat",
         image: "mortal.png",
-        description: "Fight alien invaders in this action-packed space shooter with amazing visuals.",
-        downloadLink: "https://www.mediafire.com/file/YOUR_GAME4_LINK/file",
+        description: "not yet for download .",
+        downloadLink: "",
         type: "premium", 
         pinRequired: true
     },
-   
+     
     {
         id: 7,
-        name: "god of war",
+        name: "god of war 1",
         image: "war.jpg",
-        description: "Survive the zombie apocalypse in this thrilling survival horror game.",
-        downloadLink: "https://www.mediafire.com/file/YOUR_GAME5_LINK/file",
+        description: "god of war 1 .",
+        downloadLink: "https://www.mediafire.com/file/zsj8ckt6ftdlhrq/God+of+War+1+Vampire+Edition.iso/file",
         type: "free",
         pinRequired: false
     },
@@ -68,8 +86,8 @@ const games = [
         id: 8,
         name: "fifa 26",
         image: "fc.jpg",
-        description: "the most realistic football game with all your favorite team and players",
-        downloadLink:"game kali la kivita",
+        description: "not yet for download ",
+        downloadLink:"fifa.html",
         type: "premium",
         pinRequired: true
     },
