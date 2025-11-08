@@ -84,9 +84,9 @@ const games = [
     },
     {
         id: 8,
-        name: "fifa 26",
+        name: "fifa 16 mod fc 26",
         image: "fc.jpg",
-        description: " game la fifa 26download na huenjoy  ",
+        description: " game la fifa 26 download na huenjoy  ",
         downloadLink:"fifa.html",
         type: "free",
         pinRequired: false
