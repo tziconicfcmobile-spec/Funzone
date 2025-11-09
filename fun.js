@@ -83,6 +83,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 14,
+        name: "GTA v mod",
+        image: "gtav.jpg",
+        description: " gta san Andreas mod GTA v download na huenjoy, wasiliana nasi kwa pin",
+        downloadLink:"gtav.html",
+        type: "premium",
+        pinRequired: true
+    },
+    {
         id: 8,
         name: "fifa 16 mod fc 26",
         image: "fc.jpg",
