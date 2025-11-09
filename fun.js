@@ -109,6 +109,15 @@ const games = [
         type: "free",
         pinRequired: false
     },
+    {
+        id: 13,
+        name: "Ea fc 26 ppsspp",
+        image: "eapsp.jpg",
+        description: "download and enjoy ea fc 26 for free offline access",
+        downloadLink:"eapsp.html",
+        type: "free",
+        pinRequired: false
+    },
     
 ];
 
