@@ -110,6 +110,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 16,
+        name: "European front remastered",
+        image: "eu.jpg",
+        description: "download and enjoy european front remastered",
+        downloadLink:"https://www.mediafire.com/file/jzcbzet1panbvzx/EUROPE_FRONT_REMASTERED_1.0.2_MOD_BY_RADJA_GAMERZ.zip/file",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 12,
         name: "GTA San Andreas",
         image: "gta.jpg",
