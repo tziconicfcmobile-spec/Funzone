@@ -145,7 +145,15 @@ const games = [
         type: "free",
         pinRequired: false
     },
-    
+    {
+        id: 17,
+        name: "dls 26 wydad mod",
+        image: "wydad.jpg",
+        description: "download and enjoy dls gama wydad mod for free",
+        downloadLink:"dls.html",
+        type: "free",
+        pinRequired: false
+    },
 ];
 
 // Initialize website when page loads
