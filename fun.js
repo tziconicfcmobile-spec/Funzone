@@ -128,6 +128,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 18,
+        name: "fts 26",
+        image: "fts26.jpg",
+        description: "your favorite game of fts 26 download now and enjoy",
+        downloadLink:"https://www.mediafire.com/file/ablf3eqfv1jr50d/FTS_26_Difficult_LN30_DROID_New_Update.zip/file",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 15,
         name: "tomb raider",
         image: "tomb.jpg",
@@ -135,7 +144,7 @@ const games = [
         downloadLink:"https://www.mediafire.com/file/es2j8qzf51o5aol/Tomb+Raider+-+Anniversary+(USA)+(PSP)+(PSN).zip/file",
         type: "free",
         pinRequired: false
-    },,
+    },
     {
         id: 13,
         name: "Ea fc 26 ppsspp",
@@ -149,7 +158,7 @@ const games = [
         id: 17,
         name: "dls 26 wydad mod",
         image: "wydad.jpg",
-        description: "download and enjoy dls gama wydad mod for free",
+        description: "download and enjoy dls game wydad mod for free",
         downloadLink:"dls.html",
         type: "free",
         pinRequired: false
