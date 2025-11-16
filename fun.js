@@ -164,6 +164,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 20,
+        name: "Amizing spider-man 2",
+        image: "spider.jpg",
+        description: "download spider-man amazing 2 for free and enjoy while playing it",
+        downloadLink:"spider.html",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 17,
         name: "dls 26 wydad mod",
         image: "wydad.jpg",
