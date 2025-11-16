@@ -101,6 +101,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 19,
+        name: "max Payne",
+        image: "max.jpg",
+        description: " download max Payne game, pin you will find out in my you-tube channel",
+        downloadLink:"https://www.mediafire.com/file/igurijugpfungvp/max+Payne+(+funzone).zip/file",
+        type: "premium",
+        pinRequired: true
+    },
+    {
         id: 11,
         name: "dls 26 mod fc 26",
         image: "dls.jpg",
