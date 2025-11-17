@@ -28,6 +28,24 @@ const games = [
         pinRequired: false
     },
     {
+        id: 11,
+        name: "dls 26 mod fc 26",
+        image: "dls.jpg",
+        description: "download and play your favorite football game dls 26 mod fc 26 | offline |",
+        downloadLink: "https://www.mediafire.com/file/fcn4gxlcdnb1zxr/DLS_26_MOD_FC_26.zip/file?dkey=g7mnepfhe8p&r=1083",
+        type: "free",
+        pinRequired: false
+    },
+    {
+        id: 12,
+        name: "GTA San Andreas",
+        image: "gta.jpg",
+        description: "download and enjoy the most beautiful GTA games of all time",
+        downloadLink: "https://www.mediafire.com/file/041u4yh2l4l79kl/GTA_San_Andreas_Mod_2.11.277-RisTechy.com.apk/file",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 3,
         name: "UFC 5 PPSSPP",
         image: "u.jpg",
@@ -45,7 +63,7 @@ const games = [
         type: "free",
         pinRequired: false
     },
-     {
+    {
         id: 4,
         name: "pinodeire world bus",
         image: "bus.jpg",
@@ -54,21 +72,20 @@ const games = [
         type: "premium",
         pinRequired: true
     },
-       
     {
         id: 6,
         name: "mortal combat",
         image: "mortal.png",
-        description: " .",
-        downloadLink: " download na huenjoy game lako la mortal kombat",
+        description: "download na huenjoy game lako la mortal kombat",
+        downloadLink: "#",
         type: "free", 
         pinRequired: false
     },
-     {
+    {
         id: 10,
         name: "dfl 26",
         image: "dfl.jpg",
-        description: ".game Kali la dfl wasiliana nasi kupata pin",
+        description: "game Kali la dfl wasiliana nasi kupata pin",
         downloadLink: "dfl.html",
         type: "premium",
         pinRequired: true
@@ -86,8 +103,8 @@ const games = [
         id: 14,
         name: "GTA v mod",
         image: "gtav.jpg",
-        description: " gta san Andreas mod GTA v download na huenjoy, wasiliana nasi kwa pin",
-        downloadLink:"gtav.html",
+        description: "gta san Andreas mod GTA v download na huenjoy, wasiliana nasi kwa pin",
+        downloadLink: "gtav.html",
         type: "premium",
         pinRequired: true
     },
@@ -95,8 +112,8 @@ const games = [
         id: 8,
         name: "fifa 16 mod fc 26",
         image: "fc.jpg",
-        description: " game la fifa 26 download na huenjoy  ",
-        downloadLink:"fifa.html",
+        description: "game la fifa 26 download na huenjoy",
+        downloadLink: "fifa.html",
         type: "free",
         pinRequired: false
     },
@@ -104,35 +121,17 @@ const games = [
         id: 19,
         name: "max Payne",
         image: "max.jpg",
-        description: " download max Payne game, pin you will find out in my you-tube channel",
-        downloadLink:"https://www.mediafire.com/file/igurijugpfungvp/max+Payne+(+funzone).zip/file",
+        description: "download max Payne game, pin you will find out in my you-tube channel",
+        downloadLink: "https://www.mediafire.com/file/igurijugpfungvp/max+Payne+(+funzone).zip/file",
         type: "premium",
         pinRequired: true
-    },
-    {
-        id: 11,
-        name: "dls 26 mod fc 26",
-        image: "dls.jpg",
-        description: "download and play your favorite football game dls 26 mod fc 26 | offline |",
-        downloadLink:"https://www.mediafire.com/file/fcn4gxlcdnb1zxr/DLS_26_MOD_FC_26.zip/file?dkey=g7mnepfhe8p&r=1083",
-        type: "free",
-        pinRequired: false
     },
     {
         id: 16,
         name: "European front remastered",
         image: "eu.jpg",
         description: "download and enjoy european front remastered",
-        downloadLink:"https://www.mediafire.com/file/jzcbzet1panbvzx/EUROPE_FRONT_REMASTERED_1.0.2_MOD_BY_RADJA_GAMERZ.zip/file",
-        type: "free",
-        pinRequired: false
-    },
-    {
-        id: 12,
-        name: "GTA San Andreas",
-        image: "gta.jpg",
-        description: "download and enjoy the most beautiful GTA games of all time",
-        downloadLink:"https://www.mediafire.com/file/041u4yh2l4l79kl/GTA_San_Andreas_Mod_2.11.277-RisTechy.com.apk/file",
+        downloadLink: "https://www.mediafire.com/file/jzcbzet1panbvzx/EUROPE_FRONT_REMASTERED_1.0.2_MOD_BY_RADJA_GAMERZ.zip/file",
         type: "free",
         pinRequired: false
     },
@@ -141,7 +140,7 @@ const games = [
         name: "fts 26",
         image: "fts26.jpg",
         description: "your favorite game of fts 26 download now and enjoy",
-        downloadLink:"https://www.mediafire.com/file/ablf3eqfv1jr50d/FTS_26_Difficult_LN30_DROID_New_Update.zip/file",
+        downloadLink: "https://www.mediafire.com/file/ablf3eqfv1jr50d/FTS_26_Difficult_LN30_DROID_New_Update.zip/file",
         type: "free",
         pinRequired: false
     },
@@ -150,7 +149,7 @@ const games = [
         name: "tomb raider",
         image: "tomb.jpg",
         description: "download and enjoy tomb rider PSP games for free",
-        downloadLink:"https://www.mediafire.com/file/es2j8qzf51o5aol/Tomb+Raider+-+Anniversary+(USA)+(PSP)+(PSN).zip/file",
+        downloadLink: "https://www.mediafire.com/file/es2j8qzf51o5aol/Tomb+Raider+-+Anniversary+(USA)+(PSP)+(PSN).zip/file",
         type: "free",
         pinRequired: false
     },
@@ -159,7 +158,7 @@ const games = [
         name: "Ea fc 26 ppsspp",
         image: "eapsp.jpg",
         description: "download and enjoy ea fc 26 for free offline access",
-        downloadLink:"eapsp.html",
+        downloadLink: "eapsp.html",
         type: "free",
         pinRequired: false
     },
@@ -168,7 +167,7 @@ const games = [
         name: "Amizing spider-man 2",
         image: "spider.jpg",
         description: "download spider-man amazing 2 for free and enjoy while playing it",
-        downloadLink:"spider.html",
+        downloadLink: "spider.html",
         type: "free",
         pinRequired: false
     },
@@ -177,19 +176,69 @@ const games = [
         name: "dls 26 wydad mod",
         image: "wydad.jpg",
         description: "download and enjoy dls game wydad mod for free",
-        downloadLink:"dls.html",
+        downloadLink: "dls.html",
         type: "free",
         pinRequired: false
     },
 ];
 
+// Function to get daily trending games (changes every day)
+function getDailyTrendingGames() {
+    // Get today's date as a unique number
+    const today = new Date();
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    
+    // Use the day of year as a seed for random selection
+    const seed = dayOfYear;
+    
+    // Create a shuffled array of games based on today's seed
+    const shuffledGames = [...games].sort((a, b) => {
+        const hashA = stringHash(a.name + seed);
+        const hashB = stringHash(b.name + seed);
+        return hashA - hashB;
+    });
+    
+    // Select 5 random games for today
+    return shuffledGames.slice(0, 5);
+}
+
+// Simple string hash function for consistent random selection
+function stringHash(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return Math.abs(hash);
+}
+
+// Function to check if trending games need to be updated
+function shouldUpdateTrendingGames() {
+    const lastUpdate = localStorage.getItem('trendingLastUpdate');
+    const today = new Date().toDateString();
+    
+    if (!lastUpdate || lastUpdate !== today) {
+        localStorage.setItem('trendingLastUpdate', today);
+        return true;
+    }
+    return false;
+}
+
 // Initialize website when page loads
 document.addEventListener('DOMContentLoaded', function() {
     loadGames();
+    loadTrendingGames();
     initSearch();
     initFilters();
     initSmoothScrolling();
     handleDirectGameLinks();
+    initThemeToggle();
+    
+    // Check and update trending games daily
+    if (shouldUpdateTrendingGames()) {
+        console.log('Updating trending games for today...');
+    }
 });
 
 // Load games into the grid
@@ -203,6 +252,64 @@ function loadGames() {
         const gameCard = createGameCard(game);
         gamesGrid.appendChild(gameCard);
     });
+}
+
+// Load trending games with marquee effect
+function loadTrendingGames() {
+    const trendingTrack = document.getElementById('trendingTrack');
+    if (!trendingTrack) return;
+    
+    trendingTrack.innerHTML = '';
+    
+    // Get today's trending games
+    const trendingGames = getDailyTrendingGames();
+    
+    // Add trending property to today's games for display
+    trendingGames.forEach(game => {
+        game.trending = true;
+    });
+    
+    // Duplicate trending games for smooth continuous marquee
+    const allTrendingGames = [...trendingGames, ...trendingGames, ...trendingGames];
+    
+    allTrendingGames.forEach(game => {
+        const trendingCard = createTrendingCard(game);
+        trendingTrack.appendChild(trendingCard);
+    });
+    
+    // Update trending games counter in console
+    console.log(`Today's trending games (${trendingGames.length}):`, trendingGames.map(g => g.name));
+}
+
+// Create trending game card
+function createTrendingCard(game) {
+    const trendingCard = document.createElement('div');
+    trendingCard.className = 'trending-card';
+    
+    const badgeClass = game.type === 'free' ? 'badge-free' : 'badge-premium';
+    const badgeText = game.type === 'free' ? 'FREE' : 'PREMIUM';
+    
+    trendingCard.innerHTML = `
+        <div class="game-image-container">
+            <img src="${game.image}" alt="${game.name}" class="game-image" onerror="handleImageError(this)">
+            <div class="trending-badge">🔥 TRENDING</div>
+            <div class="game-badge ${badgeClass}">${badgeText}</div>
+        </div>
+        <div class="game-content">
+            <h3 class="game-title">${game.name}</h3>
+            <p class="game-description">${game.description}</p>
+            <div class="game-actions">
+                <a href="${game.downloadLink}" class="download-btn" target="_blank">
+                    Download Now
+                </a>
+                <button class="share-btn" onclick="shareGame(${game.id})">
+                    📤 Share
+                </button>
+            </div>
+        </div>
+    `;
+    
+    return trendingCard;
 }
 
 // Create individual game card
@@ -247,6 +354,32 @@ function handleImageError(img) {
     console.log(`Image failed to load: ${img.src}`);
     img.src = 'https://via.placeholder.com/300x200/667eea/ffffff?text=Game+Image';
     img.alt = 'Game Image';
+}
+
+// Initialize theme toggle
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    // Set default theme to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    
+    // Set initial theme
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeButton(savedTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeButton(newTheme);
+    });
+}
+
+// Update theme button icon
+function updateThemeButton(theme) {
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
 }
 
 // Initialize search functionality
@@ -493,10 +626,16 @@ function shareWebsite() {
 const style = document.createElement('style');
 style.textContent = `
     .search-highlight {
-        background: #fff3cd;
+        background: #856404;
+        color: #fff3cd;
         padding: 0.1rem 0.2rem;
         border-radius: 3px;
         font-weight: bold;
+    }
+    
+    [data-theme="light"] .search-highlight {
+        background: #fff3cd;
+        color: #856404;
     }
 `;
 document.head.appendChild(style);
