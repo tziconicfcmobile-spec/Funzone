@@ -186,6 +186,51 @@
         </div>
     </footer>
 
+    <!-- AI Assistant -->
+    <div id="ai-assistant">
+        <div class="assistant-icon" onclick="toggleAssistant()">
+            <span class="assistant-emoji">💭</span>
+            <div class="pulse-effect"></div>
+            <div class="neon-glow"></div>
+        </div>
+        
+        <div class="assistant-window" id="assistantWindow">
+            <div class="assistant-header">
+                <div class="assistant-title">
+                    <span class="assistant-avatar">🎮</span>
+                    <h3>FunZone Assistant</h3>
+                </div>
+                <button class="close-btn" onclick="toggleAssistant()">×</button>
+            </div>
+            
+            <div class="assistant-messages" id="assistantMessages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        <strong>Habari! 👋</strong><br>
+                        Mimi ni FunZone Assistant. Ninaweza kukusaidia kupata:
+                        • 🔓 PIN za games premium<br>
+                        • 📥 Msaada wa download & installation<br>
+                        • 🎮 Kupendekeza games<br>
+                        • ❓ Kujibu maswali yoyote<br><br>
+                        <em>Andika swali lako hapa chini...</em>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quick-questions">
+                <button class="quick-btn" onclick="askQuickQuestion('Nahitaji PIN ya game premium')">🔐 Pata PIN</button>
+                <button class="quick-btn" onclick="askQuickQuestion('Games za free zipo?')">🆓 Free Games</button>
+                <button class="quick-btn" onclick="askQuickQuestion('Nina tatizo na download')">📥 Msaada Download</button>
+                <button class="quick-btn" onclick="askQuickQuestion('Games mpya zipo?')">🆕 Games Mpya</button>
+            </div>
+            
+            <div class="assistant-input">
+                <input type="text" id="userQuestion" placeholder="Andika swali lako hapa..." onkeypress="handleKeyPress(event)">
+                <button class="send-btn" onclick="handleUserQuestion()">➤</button>
+            </div>
+        </div>
+    </div>
+
     <script src="fun.js"></script>
 </body>
 </html>
