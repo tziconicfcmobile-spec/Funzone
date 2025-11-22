@@ -28,20 +28,20 @@ const games = [
         pinRequired: false
     },
     {
+        id: 23,
+        name: "fc 26 mod fifa 26",
+        image: "26.jpg",
+        description: "download and play your favorite football game fc 26 mod fifa 26 | offline |",
+        downloadLink: "26.html",
+        type: "premium",
+        pinRequired: true 
+    },
+    {
         id: 11,
         name: "dls 26 mod fc 26",
         image: "dls.jpg",
         description: "download and play your favorite football game dls 26 mod fc 26 | offline |",
         downloadLink: "https://www.mediafire.com/file/fcn4gxlcdnb1zxr/DLS_26_MOD_FC_26.zip/file?dkey=g7mnepfhe8p&r=1083",
-        type: "free",
-        pinRequired: false
-    },
-    {
-        id: 12,
-        name: "GTA San Andreas",
-        image: "gta.jpg",
-        description: "download and enjoy the most beautiful GTA games of all time",
-        downloadLink: "https://www.mediafire.com/file/041u4yh2l4l79kl/GTA_San_Andreas_Mod_2.11.277-RisTechy.com.apk/file",
         type: "free",
         pinRequired: false
     },
@@ -53,6 +53,15 @@ const games = [
         downloadLink: "https://www.mediafire.com/file/lzfbfs7irv0w2f8/UFC_5_PSP_BY_FUNZONE.7z/file",
         type: "premium",
         pinRequired: true
+    },
+    {
+        id: 12,
+        name: "GTA San Andreas",
+        image: "gta.jpg",
+        description: "download and enjoy the most beautiful GTA games of all time",
+        downloadLink: "https://www.mediafire.com/file/041u4yh2l4l79kl/GTA_San_Andreas_Mod_2.11.277-RisTechy.com.apk/file",
+        type: "free",
+        pinRequired: false
     },
     {
         id: 9,
@@ -146,10 +155,10 @@ const games = [
     },
     {
         id: 22,
-        name: "call of duty | modern warfare|",
-        image: "call.jpg",
-        description: " download now for free call of duty modern warfare (dolphin emulator)",
-        downloadLink:"https://www.mediafire.com/file/6fm25f39to92gjy/Call_of_Duty_-_Modern_Warfare_3_%2528USA%2529.7z/file",
+        name: "wwe",
+        image: "tomb.jpg",
+        description: "",
+        downloadLink: "https://dl.apkvision.org/wwe-2k25-netflix-edition/WWE-2K25-v0.836.0-unlocked-apkvision.apk",
         type: "free",
         pinRequired: false
     },
@@ -200,23 +209,33 @@ const games = [
     },
 ];
 
-// Function to get daily trending games (changes every day)
-function getDailyTrendingGames() {
-    // Get today's date as a unique number
-    const today = new Date();
-    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+// Function to handle all download links - WORKS WITH ANY LINK (NO PIN PROMPT)
+function handleDownload(gameId, downloadLink) {
+    const game = games.find(g => g.id === gameId);
+    if (!game) return;
     
-    // Use the day of year as a seed for random selection
-    const seed = dayOfYear;
+    // Handle different types of links - DIRECT DOWNLOAD WITHOUT PIN
+    if (downloadLink.startsWith('http')) {
+        // External links (MediaFire, APKVision, etc.)
+        window.open(downloadLink, '_blank');
+    } else if (downloadLink.endsWith('.html')) {
+        // Internal HTML pages
+        window.location.href = downloadLink;
+    } else if (downloadLink === '#') {
+        // Links that are not ready
+        alert('⚠️ Download link for this game is not available yet. Please check back later or contact us.');
+    } else {
+        // Fallback for any other links
+        window.open(downloadLink, '_blank');
+    }
+}
+
+// Function to get random trending games (changes every 10 seconds)
+function getRandomTrendingGames() {
+    // Create a shuffled array of games
+    const shuffledGames = [...games].sort(() => Math.random() - 0.5);
     
-    // Create a shuffled array of games based on today's seed
-    const shuffledGames = [...games].sort((a, b) => {
-        const hashA = stringHash(a.name + seed);
-        const hashB = stringHash(b.name + seed);
-        return hashA - hashB;
-    });
-    
-    // Select 5 random games for today
+    // Select 5 random games
     return shuffledGames.slice(0, 5);
 }
 
@@ -253,6 +272,9 @@ document.addEventListener('DOMContentLoaded', function() {
     handleDirectGameLinks();
     initThemeToggle();
     
+    // Auto-update trending games every 10 seconds
+    setInterval(loadTrendingGames, 10000);
+    
     // Check and update trending games daily
     if (shouldUpdateTrendingGames()) {
         console.log('Updating trending games for today...');
@@ -279,10 +301,10 @@ function loadTrendingGames() {
     
     trendingTrack.innerHTML = '';
     
-    // Get today's trending games
-    const trendingGames = getDailyTrendingGames();
+    // Get random trending games (changes every time)
+    const trendingGames = getRandomTrendingGames();
     
-    // Add trending property to today's games for display
+    // Add trending property to games for display
     trendingGames.forEach(game => {
         game.trending = true;
     });
@@ -296,7 +318,7 @@ function loadTrendingGames() {
     });
     
     // Update trending games counter in console
-    console.log(`Today's trending games (${trendingGames.length}):`, trendingGames.map(g => g.name));
+    console.log(`Updated trending games (${trendingGames.length}):`, trendingGames.map(g => g.name));
 }
 
 // Create trending game card
@@ -317,9 +339,9 @@ function createTrendingCard(game) {
             <h3 class="game-title">${game.name}</h3>
             <p class="game-description">${game.description}</p>
             <div class="game-actions">
-                <a href="${game.downloadLink}" class="download-btn" target="_blank">
+                <button class="download-btn" onclick="handleDownload(${game.id}, '${game.downloadLink}')">
                     Download Now
-                </a>
+                </button>
                 <button class="share-btn" onclick="shareGame(${game.id})">
                     📤 Share
                 </button>
@@ -355,9 +377,9 @@ function createGameCard(game) {
                 <div class="pin-notice ${noticeClass}">${noticeText}</div>
                 
                 <div class="game-actions">
-                    <a href="${game.downloadLink}" class="download-btn" target="_blank">
+                    <button class="download-btn" onclick="handleDownload(${game.id}, '${game.downloadLink}')">
                         Download Now
-                    </a>
+                    </button>
                     <button class="share-btn" onclick="shareGame(${game.id})">
                         📤 Share Link
                     </button>
@@ -640,6 +662,295 @@ function shareWebsite() {
             prompt('Copy this link to share:', shareText);
         });
     }
+}
+
+// ===== AI ASSISTANT FUNCTIONALITY =====
+let isAssistantOpen = false;
+
+function toggleAssistant() {
+    const assistantWindow = document.getElementById('assistantWindow');
+    isAssistantOpen = !isAssistantOpen;
+    
+    if (isAssistantOpen) {
+        assistantWindow.style.display = 'flex';
+        setTimeout(() => {
+            assistantWindow.style.transform = 'translateY(0)';
+            assistantWindow.style.opacity = '1';
+        }, 10);
+        document.getElementById('userQuestion').focus();
+    } else {
+        assistantWindow.style.transform = 'translateY(20px)';
+        assistantWindow.style.opacity = '0';
+        setTimeout(() => {
+            assistantWindow.style.display = 'none';
+        }, 300);
+    }
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        handleUserQuestion();
+    }
+}
+
+function askQuickQuestion(question) {
+    document.getElementById('userQuestion').value = question;
+    handleUserQuestion();
+}
+
+function handleUserQuestion() {
+    const userInput = document.getElementById('userQuestion');
+    const question = userInput.value.trim();
+    
+    if (!question) return;
+    
+    // Display user message
+    addMessage(question, 'user');
+    userInput.value = '';
+    
+    // Process and respond
+    setTimeout(() => {
+        const response = generateAIResponse(question);
+        addMessage(response, 'bot');
+    }, 1000);
+}
+
+function addMessage(content, sender) {
+    const messagesContainer = document.getElementById('assistantMessages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}-message`;
+    
+    messageDiv.innerHTML = `
+        <div class="message-content">${content}</div>
+    `;
+    
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function generateAIResponse(question) {
+    const lowerQuestion = question.toLowerCase();
+    
+    // 🔐 PIN-RELATED QUESTIONS - MUHIMU KABISA!
+    if (lowerQuestion.includes('pin') || lowerQuestion.includes('pini') || 
+        lowerQuestion.includes('premium') || lowerQuestion.includes('lipia') ||
+        lowerQuestion.includes('bei') || lowerQuestion.includes('pesa') ||
+        lowerQuestion.includes('money') || lowerQuestion.includes('cost') ||
+        lowerQuestion.includes('price') || lowerQuestion.includes('unlock') ||
+        lowerQuestion.includes('locked') || lowerQuestion.includes('fungua')) {
+        
+        return `🔐 <strong>KUHUSU PIN ZA GAMES PREMIUM:</strong><br><br>
+        Kwa kupata PIN ya game yoyote premium:<br>
+        • <strong>Tuma neno "PIN" kwenye WhatsApp: <span style="color:#667eea">0671131355</span></strong><br>
+        • Utapata PIN haraka kwa bei nafuu<br>
+        • Tunakupigia simu mara moja ukiitumia<br>
+        • Pia tunaweza kukusaidia kuinstall game<br><br>
+        <em>📞 Piga simu au tuma WhatsApp: <strong>0671131355</strong></em>`;
+    }
+    
+    // 🆓 FREE GAMES
+    if (lowerQuestion.includes('free') || lowerQuestion.includes('bure') || 
+        lowerQuestion.includes('hapana pesa') || lowerQuestion.includes('no money') ||
+        lowerQuestion.includes('complimentary') || lowerQuestion.includes('without pay')) {
+        return `🆓 <strong>GAMES ZA BURE:</strong><br><br>
+        Tuna games nyingi za bure! Zifuatazo ni baadhi tu:<br>
+        • eFootball 26 PPSSPP<br>
+        • Bright Memory Infinite<br>
+        • DLS 26 MOD FC 26<br>
+        • GTA San Andreas<br>
+        • God Hand<br>
+        • God of War 1<br>
+        • Mortal Kombat<br>
+        • Tomb Raider<br>
+        • European Front Remastered<br>
+        • FTS 26<br><br>
+        <em>Bonyeza "FREE GAMES" kwenye filter au tafuta game unayotaka!</em>`;
+    }
+    
+    // 📥 DOWNLOAD HELP
+    if (lowerQuestion.includes('download') || lowerQuestion.includes('pakua') ||
+        lowerQuestion.includes('install') || lowerQuestion.includes('weka') ||
+        lowerQuestion.includes('sakinisha') || lowerQuestion.includes('set up') ||
+        lowerQuestion.includes('saved') || lowerQuestion.includes('save')) {
+        return `📥 <strong>MSAADA WA DOWNLOAD & INSTALLATION:</strong><br><br>
+        Ikiwa una shida ya kudownload au kuinstall:<br>
+        • Hakikisha una internet nzuri na imetosheleza<br>
+        • Tumia browser ya Chrome kwa download bora<br>
+        • Angalia storage ya simu inatosheleze<br>
+        • Kwa games za PSP, unahitaji PPSSPP emulator kwanza<br>
+        • Ikiwa file ni .zip au .rar, unahitaji app ya kufungua<br>
+        • Kama bado shida, piga: <strong>0671131355</strong>`;
+    }
+    
+    // 🎮 GAME RECOMMENDATIONS
+    if (lowerQuestion.includes('pendekeza') || lowerQuestion.includes('zuri') ||
+        lowerQuestion.includes('kali') || lowerQuestion.includes('bora') ||
+        lowerQuestion.includes('mpira') || lowerQuestion.includes('soka') ||
+        lowerQuestion.includes('football') || lowerQuestion.includes('action') ||
+        lowerQuestion.includes('adventure') || lowerQuestion.includes('racing') ||
+        lowerQuestion.includes('sports') || lowerQuestion.includes('fighting')) {
+        return `🎮 <strong>GAMES BORA KULINGANA NA AINA:</strong><br><br>
+        <strong>Kwa wapenzi wa MPIRA:</strong><br>
+        • eFootball 26 PPSSPP (BURE)<br>
+        • FTS 25 NBC Mod (PREMIUM)<br>
+        • DLS 26 MOD FC 26 (BURE)<br>
+        • FC 26 Mod FIFA 26 (PREMIUM)<br><br>
+        <strong>Kwa wapenzi wa ACTION:</strong><br>
+        • God of War 1 (BURE)<br>
+        • Bright Memory Infinite (BURE)<br>
+        • Mortal Kombat (BURE)<br>
+        • UFC 5 (PREMIUM)<br><br>
+        <strong>Kwa wapenzi wa RACING/DRIVING:</strong><br>
+        • Pinodeire World Bus (PREMIUM)<br><br>
+        <em>Unaweza kutumia search kwa kupata games za aina unayotaka!</em>`; 
+    }
+    
+    // 📱 TECHNICAL SUPPORT
+    if (lowerQuestion.includes('tatizo') || lowerQuestion.includes('shida') ||
+        lowerQuestion.includes('haifanyi') || lowerQuestion.includes('crash') ||
+        lowerQuestion.includes('error') || lowerQuestion.includes('siwezi') ||
+        lowerQuestion.includes('not working') || lowerQuestion.includes('problem') ||
+        lowerQuestion.includes('issue') || lowerQuestion.includes('fix') ||
+        lowerQuestion.includes('broken') || lowerQuestion.includes('corrupt')) {
+        return `🔧 <strong>MSAADA WA KI-TECHNICAL:</strong><br><br>
+        Kama game haifanyi kazi vizuri:<br>
+        • Hakikisha simu yako ina Android 6.0 au juu zaidi<br>
+        • Angalia storage inatosheleze (angalia kwenye Settings)<br>
+        • Kama ni game la PSP, weka PPSSPP emulator kwanza<br>
+        • Jaribu kui-restart simu yako<br>
+        • Hakikisha umedownload game vizuri<br>
+        • Ikiwa bado shida, piga: <strong>0671131355</strong> kwa msaada wa haraka`;
+    }
+    
+    // 🆕 NEW GAMES & UPDATES
+    if (lowerQuestion.includes('mpya') || lowerQuestion.includes('update') ||
+        lowerQuestion.includes('latest') || lowerQuestion.includes('mengine') ||
+        lowerQuestion.includes('new') || lowerQuestion.includes('fresh') ||
+        lowerQuestion.includes('recent') || lowerQuestion.includes('added')) {
+        return `🆕 <strong>GAMES MPYA & UPDATES:</strong><br><br>
+        Tunazidi kuongeza games mpya kila siku! Baadhi ya games mpya:<br>
+        • FTS 26 - Update mpya<br>
+        • DLS 26 MOD FC 26<br>
+        • eFootball 26 PPSSPP<br>
+        • Bright Memory Infinite<br><br>
+        Tunatafuta kuongeza zaidi kama:<br>
+        • FIFA 26 updates<br>
+        • GTA VI (inapotoka)<br>
+        • Call of Duty Mobile mods<br>
+        • Na mengine mengi!<br><br>
+        <em>Fuata YouTube channel yetu kwa updates: @funzone-g7</em>`;
+    }
+    
+    // ℹ️ ABOUT FUNZONE
+    if (lowerQuestion.includes('funzone') || lowerQuestion.includes('wenu') ||
+        lowerQuestion.includes('legit') || lowerQuestion.includes('salama') ||
+        lowerQuestion.includes('safe') || lowerQuestion.includes('trust') ||
+        lowerQuestion.includes('real') || lowerQuestion.includes('authentic') ||
+        lowerQuestion.includes('about') || lowerQuestion.includes('kuhusu')) {
+        return `ℹ️ <strong>KUHUSU FUNZONE:</strong><br><br>
+        • Tunatoa games za kiwango cha juu za simu<br>
+        • Games zote ni SAFE bila virus - tunazitest kwanza<br>
+        • Tuna msaada 24/7 kwa WhatsApp na simu<br>
+        • Tumeanzishwa mwaka 2025<br>
+        • Creator: SCOBA77<br>
+        • Lengo: Kuwapa watu games bora kwa bei nafuu<br><br>
+        <em>📞 Wasiliana nasi: <strong>0671131355</strong></em>`;
+    }
+    
+    // 🎯 SPECIFIC GAME QUESTIONS
+    if (lowerQuestion.includes('fifa') || lowerQuestion.includes('pes') || 
+        lowerQuestion.includes('efootball') || lowerQuestion.includes('soccer') ||
+        lowerQuestion.includes('dls') || lowerQuestion.includes('dream league') ||
+        lowerQuestion.includes('fts') || lowerQuestion.includes('first touch') ||
+        lowerQuestion.includes('gta') || lowerQuestion.includes('grand theft') ||
+        lowerQuestion.includes('god of war') || lowerQuestion.includes('mortal kombat') ||
+        lowerQuestion.includes('ufc') || lowerQuestion.includes('fighting') ||
+        lowerQuestion.includes('bus') || lowerQuestion.includes('basi') ||
+        lowerQuestion.includes('spider') || lowerQuestion.includes('spiderman')) {
+        
+        const gameNames = ['fifa', 'pes', 'efootball', 'dls', 'fts', 'gta', 'god of war', 'mortal kombat', 'ufc', 'bus', 'spider'];
+        const foundGame = gameNames.find(gameName => lowerQuestion.includes(gameName));
+        
+        if (foundGame) {
+            return `🎮 <strong>KUHUSU GAME LA ${foundGame.toUpperCase()}:</strong><br><br>
+            Ninaweza kukupa maelezo zaidi kuhusu game hili!<br>
+            • Angalia kwenye orodha ya games hapo juu<br>
+            • Tumia search box kwa kuiita kwa jina lake<br>
+            • Kama ni premium, tuma "PIN" kwa: <strong>0671131355</strong><br>
+            • Kama ni bure, download moja kwa moja!<br><br>
+            <em>Una swali maalum kuhusu game hili? Uliza tu!</em>`;
+        }
+    }
+    
+    // 📞 CONTACT & SUPPORT
+    if (lowerQuestion.includes('contact') || lowerQuestion.includes('wasiliana') ||
+        lowerQuestion.includes('support') || lowerQuestion.includes('msaada') ||
+        lowerQuestion.includes('help') || lowerQuestion.includes('saidia') ||
+        lowerQuestion.includes('call') || lowerQuestion.includes('piga') ||
+        lowerQuestion.includes('whatsapp') || lowerQuestion.includes('message')) {
+        return `📞 <strong>MAWASILIANO NA MSAADA:</strong><br><br>
+        Tupatie simu au tuma WhatsApp kwa:<br>
+        • Kupata PIN za games premium<br>
+        • Msaada wa ki-technical<br>
+        • Maswali yoyote kuhusu games<br>
+        • Mapendekezo ya games mpya<br><br>
+        <strong>📱 Namba ya simu/WhatsApp: <span style="color:#667eea">0671131355</span></strong><br>
+        <em>Huduma 24/7 - Tuna respond haraka!</em>`;
+    }
+    
+    // 🕒 AVAILABILITY & TIMING
+    if (lowerQuestion.includes('muda') || lowerQuestion.includes('time') ||
+        lowerQuestion.includes('saa') || lowerQuestion.includes('hour') ||
+        lowerQuestion.includes('available') || lowerQuestion.includes('patikana') ||
+        lowerQuestion.includes('open') || lowerQuestion.includes('fungua')) {
+        return `🕒 <strong>MUDA WA HUDUMA:</strong><br><br>
+        Tunakupa huduma:<br>
+        • <strong>Kila siku - 24/7</strong><br>
+        • Msaada wa haraka kwenye WhatsApp<br>
+        • Response within minutes<br>
+        • Usiku na mchana<br><br>
+        <em>Hata kama ni usiku, tuma ujumbe - tutakujibu!</em>`;
+    }
+    
+    // 💰 PAYMENT METHODS
+    if (lowerQuestion.includes('malipo') || lowerQuestion.includes('payment') ||
+        lowerQuestion.includes('lipa') || lowerQuestion.includes('pay') ||
+        lowerQuestion.includes('tuma pesa') || lowerQuestion.includes('send money') ||
+        lowerQuestion.includes('mpesa') || lowerQuestion.includes('airtel money') ||
+        lowerQuestion.includes('tigo pesa') || lowerQuestion.includes('halopesa')) {
+        return `💰 <strong>NJIA ZA KULIPIA:</strong><br><br>
+        Kwa sasa tunakubali:<br>
+        • <strong>M-Pesa</strong> (Tanzania)<br>
+        • <strong>Airtel Money</strong><br>
+        • <strong>Tigo Pesa</strong><br>
+        • <strong>HaloPesa</strong><br><br>
+        <em>Bei za PIN ni nafuu! Tuma "PIN" kwa <strong>0671131355</strong> kujua bei halisi</em>`;
+    }
+    
+    // 🎮 EMULATOR & PSP GAMES
+    if (lowerQuestion.includes('emulator') || lowerQuestion.includes('ppsspp') ||
+        lowerQuestion.includes('psp') || lowerQuestion.includes('iso') ||
+        lowerQuestion.includes('rom') || lowerQuestion.includes('console')) {
+        return `🎮 <strong>KUHUSU PSP GAMES NA EMULATOR:</strong><br><br>
+        Kwa games za PSP kama eFootball 26, UFC 5, nk:<br>
+        • Unahitaji <strong>PPSSPP Emulator</strong> kwanza<br>
+        • Tunaweza kukusaidia kuipata na kuiset up<br>
+        • Games za PSP huwa na graphics nzuri<br>
+        • Zinafanya kazi kwenye simu nyingi<br><br>
+        <em>Piga <strong>0671131355</strong> kwa msaada wa kuweka emulator</em>`;
+    }
+    
+    // DEFAULT RESPONSE
+    return `🤖 <strong>Nimekuelewa swali lako!</strong><br><br>
+    Ninaweza kukusaidia kupata:<br>
+    • 🔐 PIN za games premium<br>
+    • 🆓 Orodha ya games bure<br>
+    • 📥 Msaada wa download & installation<br>
+    • 🎮 Mapendekezo ya games<br>
+    • 🔧 Suluhisho la matatizo ya ki-technical<br>
+    • ℹ️ Maelezo kuhusu FunZone<br><br>
+    <strong>Au piga simu moja kwa moja: <span style="color:#667eea">0671131355</span></strong><br>
+    <em>Huduma 24/7 - Tuna respond haraka!</em>`;
 }
 
 // Add search highlight style
