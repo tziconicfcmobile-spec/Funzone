@@ -8,13 +8,14 @@
 :root {
     --primary-color: #667eea;
     --secondary-color: #764ba2;
-    --bg-color: #121212; /* Changed to black */
-    --text-color: #ffffff; /* Changed to white */
-    --card-bg: #1e1e1e; /* Dark card background */
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --card-bg: #1e1e1e;
     --nav-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --shadow: 0 5px 20px rgba(0,0,0,0.3);
     --border-color: #333333;
-    --section-bg: #1a1a1a; /* Dark section background */
+    --section-bg: #1a1a1a;
+    --spin-duration: 4s;
 }
 
 [data-theme="light"] {
@@ -277,7 +278,7 @@ body {
     z-index: 2;
 }
 
-/* Search Section */
+/* ===== NEON SEARCH BAR WITH SPIN ANIMATION ===== */
 .search-section {
     background: var(--section-bg);
     padding: 2rem 0;
@@ -298,6 +299,11 @@ body {
     min-width: 300px;
 }
 
+.search-input-container {
+    position: relative;
+    width: 100%;
+}
+
 .search-input {
     width: 100%;
     padding: 1rem 1rem 1rem 3rem;
@@ -308,12 +314,63 @@ body {
     transition: all 0.3s ease;
     background: var(--card-bg);
     color: var(--text-color);
+    position: relative;
+    z-index: 10;
 }
 
+/* Neon glow effect for search input - MWANGA KUBWA */
 .search-input:focus {
-    border-color: var(--primary-color);
+    border-color: #4d3fd0;
     background: var(--card-bg);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    box-shadow: 
+        0 0 20px rgba(77, 63, 208, 0.8),
+        0 0 40px rgba(77, 63, 208, 0.6),
+        0 0 60px rgba(77, 63, 208, 0.4);
+}
+
+/* Outer glow container for neon effect - MWANGA KUBWA */
+.search-glow-container {
+    position: absolute;
+    width: 105%;
+    height: 130%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(25px);
+    opacity: 0.8;
+    overflow: hidden;
+    border-radius: 60px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.search-glow-effect {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: conic-gradient(
+        from 60deg at 50% 50%,
+        transparent 0deg,
+        #4d3fd0 15deg,
+        #e830ba 60deg,
+        transparent 145deg,
+        #4d3fd0 215deg,
+        #e830ba 270deg,
+        transparent 325deg
+    );
+    animation: spin-effect var(--spin-duration) linear infinite;
+    opacity: 0.9;
+}
+
+@keyframes spin-effect {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .search-icon {
@@ -322,6 +379,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     color: #666;
+    z-index: 11;
 }
 
 [data-theme="dark"] .search-icon {
@@ -373,7 +431,7 @@ body {
     border-radius: 2px;
 }
 
-/* Games Section */
+/* ===== NEON GAME CARDS WITH SPIN ANIMATION ===== */
 .games-section {
     padding: 4rem 0;
     background: var(--section-bg);
@@ -395,22 +453,53 @@ body {
     position: relative;
 }
 
-.game-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+/* Neon border animation for game cards - WAZI SANA */
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: conic-gradient(
+        from 60deg at 50% 50%,
+        #4d3fd0 0deg,
+        #e830ba 60deg,
+        #4d3fd0 120deg,
+        #e830ba 180deg,
+        #4d3fd0 240deg,
+        #e830ba 300deg,
+        #4d3fd0 360deg
+    );
+    border-radius: 18px;
+    animation: spin-effect var(--spin-duration) linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    filter: blur(2px);
 }
 
 .game-card:hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to right, blue, purple);
-    opacity: 0.1;
-    z-index: 1;
+    opacity: 1;
+}
+
+.game-card-content {
+    position: relative;
+    background: var(--card-bg);
     border-radius: 15px;
+    overflow: hidden;
+    z-index: 2;
+    height: 100%;
+    margin: 2px;
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.game-card:hover .game-image {
+    transform: scale(1.05);
 }
 
 .game-image-container {
@@ -426,10 +515,6 @@ body {
     transition: transform 0.3s ease;
     position: relative;
     z-index: 2;
-}
-
-.game-card:hover .game-image {
-    transform: scale(1.05);
 }
 
 .game-badge {

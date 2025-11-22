@@ -145,6 +145,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 22,
+        name: "call of duty | modern warfare|",
+        image: "call.jpg",
+        description: " download now for free call of duty modern warfare (dolphin emulator)",
+        downloadLink:"https://www.mediafire.com/file/6fm25f39to92gjy/Call_of_Duty_-_Modern_Warfare_3_%2528USA%2529.7z/file",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 15,
         name: "tomb raider",
         image: "tomb.jpg",
@@ -335,22 +344,24 @@ function createGameCard(game) {
         '✅ No PIN Required - Download & Play!';
     
     gameCard.innerHTML = `
-        <div class="game-image-container">
-            <img src="${game.image}" alt="${game.name}" class="game-image" onerror="handleImageError(this)">
-            <div class="game-badge ${badgeClass}">${badgeText}</div>
-        </div>
-        <div class="game-content">
-            <h3 class="game-title">${game.name}</h3>
-            <p class="game-description">${game.description}</p>
-            <div class="pin-notice ${noticeClass}">${noticeText}</div>
-            
-            <div class="game-actions">
-                <a href="${game.downloadLink}" class="download-btn" target="_blank">
-                    Download Now
-                </a>
-                <button class="share-btn" onclick="shareGame(${game.id})">
-                    📤 Share Link
-                </button>
+        <div class="game-card-content">
+            <div class="game-image-container">
+                <img src="${game.image}" alt="${game.name}" class="game-image" onerror="handleImageError(this)">
+                <div class="game-badge ${badgeClass}">${badgeText}</div>
+            </div>
+            <div class="game-content">
+                <h3 class="game-title">${game.name}</h3>
+                <p class="game-description">${game.description}</p>
+                <div class="pin-notice ${noticeClass}">${noticeText}</div>
+                
+                <div class="game-actions">
+                    <a href="${game.downloadLink}" class="download-btn" target="_blank">
+                        Download Now
+                    </a>
+                    <button class="share-btn" onclick="shareGame(${game.id})">
+                        📤 Share Link
+                    </button>
+                </div>
             </div>
         </div>
     `;
