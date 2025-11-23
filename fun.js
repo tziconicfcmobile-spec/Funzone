@@ -136,6 +136,15 @@ const games = [
         pinRequired: true
     },
     {
+        id: 24,
+        name: "APEX RACING (UNLIMITED MONEY)",
+        image: "apex.jpg",
+        description: "download and play for free your favorite racing game which is Apex racing unlimited money ",
+        downloadLink: "https://statics.liteapks.co/Apex%20Racing/Apex-Racing-v1.20.3-mod.apk",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 16,
         name: "European front remastered",
         image: "eu.jpg",
@@ -156,8 +165,8 @@ const games = [
     {
         id: 22,
         name: "wwe",
-        image: "tomb.jpg",
-        description: "",
+        image: "wwe.jpg",
+        description: " download game lako pendwa la wwe kwa free na huenjoy wakatu unacheza",
         downloadLink: "https://dl.apkvision.org/wwe-2k25-netflix-edition/WWE-2K25-v0.836.0-unlocked-apkvision.apk",
         type: "free",
         pinRequired: false
@@ -595,7 +604,7 @@ function handleDirectGameLinks() {
     if (hash) {
         const gameId = parseInt(hash.replace('#game-', ''));
         
-        if (!isNaN(gameId) && gameId >= 1 && gameId <= 60) {
+        if (!isNaN(gameId) && gameId >= 1 && gameId <= 10000000) {
             setTimeout(() => {
                 const gamesSection = document.getElementById('games');
                 if (gamesSection) {
