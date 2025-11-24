@@ -905,7 +905,7 @@ body {
     transition: all 0.3s ease !important;
 }
 
-/* ===== AI ASSISTANT WITH NEON GLOW ===== */
+/* ===== AI ASSISTANT WITH NEON GLOW - FIXED ===== */
 #ai-assistant {
     position: fixed;
     bottom: 100px;
@@ -1014,7 +1014,7 @@ body {
     z-index: 1002;
 }
 
-.assistant-window.active {
+.assistant-window.show {
     display: flex;
     transform: translateY(0);
     opacity: 1;
@@ -1063,5 +1063,3 @@ body {
 .close-btn:hover {
     background: rgba(255,255,255,0.2);
 }
-
-.ass

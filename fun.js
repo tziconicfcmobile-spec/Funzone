@@ -29,9 +29,9 @@ const games = [
     },
     {
         id: 23,
-        name: "fc 26 mod fifa 26",
+        name: "fc 26 mod fifa 16",
         image: "26.jpg",
-        description: "download and play your favorite football game fc 26 mod fifa 26 | offline |",
+        description: "download and play your favorite football game fc 26 mod fifa 16 | offline |",
         downloadLink: "26.html",
         type: "premium",
         pinRequired: true 
@@ -154,6 +154,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 25,
+        name: "call of duty warzone",
+        image: "zone.jpg",
+        description: "download call of duty warzone for free and enjoy it while you play intire war game",
+        downloadLink: "https://d.apkpure.net/b/XAPK/com.activision.callofduty.warzone?version=latest",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 18,
         name: "fts 26",
         image: "fts26.jpg",
@@ -218,48 +227,424 @@ const games = [
     },
 ];
 
-// Function to handle all download links - WORKS WITH ANY LINK (NO PIN PROMPT)
+// ===== AI ASSISTANT YA KUKUA NA KUJIFUNZA =====
+let isAssistantOpen = false;
+
+// AI Memory Storage - Inakumbuka kila kitu
+let aiMemory = {
+    // Maswali yanayoulizwa mara kwa mara
+    frequentlyAsked: JSON.parse(localStorage.getItem('ai_frequentlyAsked')) || {},
+    
+    // Majibu yaliyojifunza
+    learnedResponses: JSON.parse(localStorage.getItem('ai_learnedResponses')) || {},
+    
+    // Mazoea ya watumiaji
+    userPreferences: JSON.parse(localStorage.getItem('ai_userPreferences')) || {},
+    
+    // Games zinazopendwa
+    popularGames: JSON.parse(localStorage.getItem('ai_popularGames')) || {},
+    
+    // Maswali ya hivi karibuni
+    recentQuestions: JSON.parse(localStorage.getItem('ai_recentQuestions')) || [],
+    
+    // Interaction counter
+    totalInteractions: parseInt(localStorage.getItem('ai_totalInteractions')) || 0,
+    
+    // Feedback tracking
+    userFeedback: JSON.parse(localStorage.getItem('ai_userFeedback')) || {}
+};
+
+// Save AI memory to localStorage
+function saveAIMemory() {
+    localStorage.setItem('ai_frequentlyAsked', JSON.stringify(aiMemory.frequentlyAsked));
+    localStorage.setItem('ai_learnedResponses', JSON.stringify(aiMemory.learnedResponses));
+    localStorage.setItem('ai_userPreferences', JSON.stringify(aiMemory.userPreferences));
+    localStorage.setItem('ai_popularGames', JSON.stringify(aiMemory.popularGames));
+    localStorage.setItem('ai_recentQuestions', JSON.stringify(aiMemory.recentQuestions));
+    localStorage.setItem('ai_totalInteractions', aiMemory.totalInteractions.toString());
+    localStorage.setItem('ai_userFeedback', JSON.stringify(aiMemory.userFeedback));
+}
+
+// Learn from user interaction
+function learnFromInteraction(question, response, category = 'general') {
+    // Count total interactions
+    aiMemory.totalInteractions++;
+    
+    // Track frequently asked questions
+    const questionKey = question.toLowerCase().trim();
+    aiMemory.frequentlyAsked[questionKey] = (aiMemory.frequentlyAsked[questionKey] || 0) + 1;
+    
+    // Track recent questions (keep only last 10)
+    aiMemory.recentQuestions.unshift({
+        question: question,
+        response: response,
+        category: category,
+        timestamp: new Date().toISOString()
+    });
+    aiMemory.recentQuestions = aiMemory.recentQuestions.slice(0, 10);
+    
+    // Track popular games mentioned
+    const gameKeywords = ['fifa', 'pes', 'efootball', 'dls', 'fts', 'gta', 'god of war', 'mortal kombat', 'ufc', 'bus', 'spider'];
+    gameKeywords.forEach(game => {
+        if (question.toLowerCase().includes(game)) {
+            aiMemory.popularGames[game] = (aiMemory.popularGames[game] || 0) + 1;
+        }
+    });
+    
+    // Save to localStorage
+    saveAIMemory();
+    
+    console.log(`🤖 AI Learned: "${question}" (Total interactions: ${aiMemory.totalInteractions})`);
+}
+
+// Get AI intelligence report
+function getAIIntelligenceReport() {
+    const topQuestions = Object.entries(aiMemory.frequentlyAsked)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([q, count]) => `${q} (${count} times)`);
+    
+    const topGames = Object.entries(aiMemory.popularGames)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([game, count]) => `${game} (${count} mentions)`);
+    
+    return {
+        totalInteractions: aiMemory.totalInteractions,
+        topQuestions: topQuestions,
+        topGames: topGames,
+        recentActivity: aiMemory.recentQuestions.length
+    };
+}
+
+// Smart response generator with learning
+function generateAIResponse(question) {
+    const lowerQuestion = question.toLowerCase();
+    
+    // Learn from this interaction
+    learnFromInteraction(question, '', 'user_question');
+    
+    // Check if we have a learned response for this exact question
+    const exactMatch = aiMemory.learnedResponses[lowerQuestion];
+    if (exactMatch) {
+        return `🎯 <strong>Nakukumbuka!</strong><br><br>${exactMatch}<br><br><em>📊 Nimejifunza jibu hili kutoka kwa maswali yaliyopita!</em>`;
+    }
+    
+    // Check for similar questions in memory
+    const similarQuestions = Object.keys(aiMemory.frequentlyAsked).filter(q => 
+        lowerQuestion.includes(q) || q.includes(lowerQuestion)
+    );
+    
+    if (similarQuestions.length > 0 && aiMemory.totalInteractions > 10) {
+        const mostFrequent = similarQuestions.reduce((a, b) => 
+            aiMemory.frequentlyAsked[a] > aiMemory.frequentlyAsked[b] ? a : b
+        );
+        
+        if (aiMemory.frequentlyAsked[mostFrequent] > 2) {
+            return `🤔 <strong>Ninaona unauliza kuhusu "${mostFrequent}"</strong><br><br>
+            Hili ni swali linaloulizwa mara kwa mara!<br><br>`;
+        }
+    }
+    
+    // 🔐 PIN-RELATED QUESTIONS
+    if (lowerQuestion.includes('pin') || lowerQuestion.includes('pini') || 
+        lowerQuestion.includes('premium') || lowerQuestion.includes('lipia') ||
+        lowerQuestion.includes('bei') || lowerQuestion.includes('pesa')) {
+        
+        // Track PIN interest
+        aiMemory.userPreferences.pinInterest = (aiMemory.userPreferences.pinInterest || 0) + 1;
+        saveAIMemory();
+        
+        return `🔐 <strong>KUHUSU PIN ZA GAMES PREMIUM:</strong><br><br>
+        Kwa kupata PIN ya game yoyote premium:<br>
+        • <strong>Tuma neno "PIN" kwenye WhatsApp: <span style="color:#667eea">0671131355</span></strong><br>
+        • Utapata PIN haraka kwa bei nafuu<br>
+        • Tunakupigia simu mara moja ukiitumia<br>
+        • Pia tunaweza kukusaidia kuinstall game<br><br>
+        <em>📞 Piga simu au tuma WhatsApp: <strong>0671131355</strong></em>`;
+    }
+    
+    // 🆓 FREE GAMES
+    if (lowerQuestion.includes('free') || lowerQuestion.includes('bure') || 
+        lowerQuestion.includes('hapana pesa') || lowerQuestion.includes('no money')) {
+        
+        // Track free games interest
+        aiMemory.userPreferences.freeGamesInterest = (aiMemory.userPreferences.freeGamesInterest || 0) + 1;
+        saveAIMemory();
+        
+        return `🆓 <strong>GAMES ZA BURE:</strong><br><br>
+        Tuna games nyingi za bure! Zifuatazo ni baadhi tu:<br>
+        • eFootball 26 PPSSPP<br>
+        • Bright Memory Infinite<br>
+        • DLS 26 MOD FC 26<br>
+        • GTA San Andreas<br>
+        • God Hand<br>
+        • God of War 1<br>
+        • Mortal Kombat<br>
+        • Tomb Raider<br>
+        • European Front Remastered<br>
+        • FTS 26<br><br>
+        <em>Bonyeza "FREE GAMES" kwenye filter au tafuta game unayotaka!</em>`;
+    }
+    
+    // 📥 DOWNLOAD HELP
+    if (lowerQuestion.includes('download') || lowerQuestion.includes('pakua') ||
+        lowerQuestion.includes('install') || lowerQuestion.includes('weka')) {
+        return `📥 <strong>MSAADA WA DOWNLOAD & INSTALLATION:</strong><br><br>
+        Ikiwa una shida ya kudownload au kuinstall:<br>
+        • Hakikisha una internet nzuri na imetosheleza<br>
+        • Tumia browser ya Chrome kwa download bora<br>
+        • Angalia storage ya simu inatosheleze<br>
+        • Kwa games za PSP, unahitaji PPSSPP emulator kwanza<br>
+        • Ikiwa file ni .zip au .rar, unahitaji app ya kufungua<br>
+        • Kama bado shida, piga: <strong>0671131355</strong>`;
+    }
+    
+    // 🎮 GAME RECOMMENDATIONS
+    if (lowerQuestion.includes('pendekeza') || lowerQuestion.includes('zuri') ||
+        lowerQuestion.includes('kali') || lowerQuestion.includes('bora') ||
+        lowerQuestion.includes('mpira') || lowerQuestion.includes('soka')) {
+        
+        // Get popular games from memory
+        const popularGamesList = Object.entries(aiMemory.popularGames)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 3)
+            .map(([game]) => game);
+        
+        let popularSection = '';
+        if (popularGamesList.length > 0 && aiMemory.totalInteractions > 5) {
+            popularSection = `<br><strong>🎮 Games Zinazopendwa:</strong><br>• ${popularGamesList.join('<br>• ')}<br><br>`;
+        }
+        
+        return `🎮 <strong>GAMES BORA KULINGANA NA AINA:</strong><br><br>
+        <strong>Kwa wapenzi wa MPIRA:</strong><br>
+        • eFootball 26 PPSSPP (BURE)<br>
+        • FTS 25 NBC Mod (PREMIUM)<br>
+        • DLS 26 MOD FC 26 (BURE)<br>
+        • FC 26 Mod FIFA 26 (PREMIUM)<br><br>
+        <strong>Kwa wapenzi wa ACTION:</strong><br>
+        • God of War 1 (BURE)<br>
+        • Bright Memory Infinite (BURE)<br>
+        • Mortal Kombat (BURE)<br>
+        • UFC 5 (PREMIUM)${popularSection}
+        <em>Unaweza kutumia search kwa kupata games za aina unayotaka!</em>`;
+    }
+    
+    // 📱 TECHNICAL SUPPORT
+    if (lowerQuestion.includes('tatizo') || lowerQuestion.includes('shida') ||
+        lowerQuestion.includes('haifanyi') || lowerQuestion.includes('crash')) {
+        return `🔧 <strong>MSAADA WA KI-TECHNICAL:</strong><br><br>
+        Kama game haifanyi kazi vizuri:<br>
+        • Hakikisha simu yako ina Android 6.0 au juu zaidi<br>
+        • Angalia storage inatosheleze (angalia kwenye Settings)<br>
+        • Kama ni game la PSP, weka PPSSPP emulator kwanza<br>
+        • Jaribu kui-restart simu yako<br>
+        • Hakikisha umedownload game vizuri<br>
+        • Ikiwa bado shida, piga: <strong>0671131355</strong> kwa msaada wa haraka`;
+    }
+    
+    // 🆕 NEW GAMES & UPDATES
+    if (lowerQuestion.includes('mpya') || lowerQuestion.includes('update') ||
+        lowerQuestion.includes('latest') || lowerQuestion.includes('mengine')) {
+        
+        // Show recent activity if available
+        let recentActivity = '';
+        if (aiMemory.recentQuestions.length > 0) {
+            const recentGames = aiMemory.recentQuestions
+                .filter(q => q.category === 'game_question')
+                .slice(0, 3);
+            if (recentGames.length > 0) {
+                recentActivity = `<br><strong>📈 Maswali ya Hivi Karibuni:</strong><br>`;
+                recentGames.forEach(q => {
+                    recentActivity += `• "${q.question.substring(0, 30)}..."<br>`;
+                });
+            }
+        }
+        
+        return `🆕 <strong>GAMES MPYA & UPDATES:</strong><br><br>
+        Tunazidi kuongeza games mpya kila siku! Baadhi ya games mpya:<br>
+        • FTS 26 - Update mpya<br>
+        • DLS 26 MOD FC 26<br>
+        • eFootball 26 PPSSPP<br>
+        • Bright Memory Infinite<br><br>
+        Tunatafuta kuongeza zaidi kama:<br>
+        • FIFA 26 updates<br>
+        • GTA VI (inapotoka)<br>
+        • Call of Duty Mobile mods<br>
+        • Na mengine mengi!${recentActivity}<br>
+        <em>Fuata YouTube channel yetu kwa updates: @funzone-g7</em>`;
+    }
+    
+    // ℹ️ ABOUT FUNZONE
+    if (lowerQuestion.includes('funzone') || lowerQuestion.includes('wenu') ||
+        lowerQuestion.includes('legit') || lowerQuestion.includes('salama')) {
+        
+        const intelligence = getAIIntelligenceReport();
+        
+        return `ℹ️ <strong>KUHUSU FUNZONE:</strong><br><br>
+        • Tunatoa games za kiwango cha juu za simu<br>
+        • Games zote ni SAFE bila virus - tunazitest kwanza<br>
+        • Tuna msaada 24/7 kwa WhatsApp na simu<br>
+        • Tumeanzishwa mwaka 2025<br>
+        • Creator: SCOBA77<br><br>
+        <strong>📊 Takwimu za AI:</strong><br>
+        • Majibu yaliyotolewa: ${intelligence.totalInteractions}<br>
+        • Shughuli za hivi karibuni: ${intelligence.recentActivity}<br><br>
+        <em>📞 Wasiliana nasi: <strong>0671131355</strong></em>`;
+    }
+    
+    // AI SPECIFIC COMMANDS
+    if (lowerQuestion.includes('umelijua') || lowerQuestion.includes('unajua') || 
+        lowerQuestion.includes('statistics') || lowerQuestion.includes('takwimu')) {
+        
+        const intelligence = getAIIntelligenceReport();
+        
+        return `📊 <strong>TAKWIMU ZA AI YANGU:</strong><br><br>
+        <strong>Jumla ya Majibu:</strong> ${intelligence.totalInteractions}<br>
+        <strong>Maswali Yanayoulizwa Mara Kwa Mara:</strong><br>• ${intelligence.topQuestions.join('<br>• ')}<br>
+        <strong>Games Zinazopendwa:</strong><br>• ${intelligence.topGames.join('<br>• ')}<br><br>
+        <em>🤖 Ninaendelea kujifunza kutoka kwa maswali yako!</em>`;
+    }
+    
+    // DEFAULT RESPONSE WITH LEARNING
+    const defaultResponses = [
+        `🤖 <strong>Nimekuelewa swali lako!</strong><br><br>
+        Ninaweza kukusaidia kupata:<br>
+        • 🔐 PIN za games premium<br>
+        • 🆓 Orodha ya games bure<br>
+        • 📥 Msaada wa download & installation<br>
+        • 🎮 Mapendekezo ya games<br><br>
+        <strong>Au piga simu moja kwa moja: <span style="color:#667eea">0671131355</span></strong>`,
+
+        `🎯 <strong>Nitasaidiaje?</strong><br><br>
+        Unaweza kuuliza kuhusu:<br>
+        • Bei za PIN za games<br>
+        • Games mpya zilizopo<br>
+        • Matatizo ya ki-technical<br>
+        • Usaidizi wa kuinstall games<br><br>
+        <em>📞 Huduma yetu 24/7: <strong>0671131355</strong></em>`,
+
+        `👋 <strong>Karibu tena!</strong><br><br>
+        Kama hujui cha kuuliza, bonyeza moja ya buttons hapo chini:<br>
+        • 🔐 Pata PIN - Kwa games premium<br>
+        • 🆓 Free Games - Orodha ya games bure<br>
+        • 📥 Msaada Download - Usaidizi wa ki-technical<br><br>
+        <em>Ninafurahi kukusaidia! 🎮</em>`
+    ];
+    
+    // Rotate default responses based on interaction count
+    const responseIndex = aiMemory.totalInteractions % defaultResponses.length;
+    return defaultResponses[responseIndex];
+}
+
+// AI Assistant UI Functions
+function toggleAssistant() {
+    const assistantWindow = document.getElementById('assistantWindow');
+    isAssistantOpen = !isAssistantOpen;
+    
+    if (isAssistantOpen) {
+        assistantWindow.style.display = 'flex';
+        setTimeout(() => {
+            assistantWindow.classList.add('show');
+        }, 10);
+        document.getElementById('userQuestion').focus();
+        
+        // Show AI stats if many interactions
+        if (aiMemory.totalInteractions > 5) {
+            console.log('🤖 AI Stats:', getAIIntelligenceReport());
+        }
+    } else {
+        assistantWindow.classList.remove('show');
+        setTimeout(() => {
+            assistantWindow.style.display = 'none';
+        }, 300);
+    }
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        handleUserQuestion();
+    }
+}
+
+function askQuickQuestion(question) {
+    document.getElementById('userQuestion').value = question;
+    handleUserQuestion();
+}
+
+function handleUserQuestion() {
+    const userInput = document.getElementById('userQuestion');
+    const question = userInput.value.trim();
+    
+    if (!question) return;
+    
+    // Display user message
+    addMessage(question, 'user');
+    userInput.value = '';
+    
+    // Process and respond
+    setTimeout(() => {
+        const response = generateAIResponse(question);
+        addMessage(response, 'bot');
+    }, 500);
+}
+
+function addMessage(content, sender) {
+    const messagesContainer = document.getElementById('assistantMessages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}-message`;
+    
+    messageDiv.innerHTML = `
+        <div class="message-content">${content}</div>
+    `;
+    
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+// Initialize AI on load
+function initAIAssistant() {
+    console.log('🤖 AI Assistant Initialized');
+    console.log('📊 Current AI Stats:', getAIIntelligenceReport());
+    
+    // Add AI stats to console every 30 interactions
+    if (aiMemory.totalInteractions > 0 && aiMemory.totalInteractions % 30 === 0) {
+        const stats = getAIIntelligenceReport();
+        console.log('🎯 AI Learning Progress:', stats);
+    }
+}
+
+// ===== ORIGINAL FUNCTIONS (HAKUJABADILIKA) =====
 function handleDownload(gameId, downloadLink) {
     const game = games.find(g => g.id === gameId);
     if (!game) return;
     
-    // Handle different types of links - DIRECT DOWNLOAD WITHOUT PIN
     if (downloadLink.startsWith('http')) {
-        // External links (MediaFire, APKVision, etc.)
         window.open(downloadLink, '_blank');
     } else if (downloadLink.endsWith('.html')) {
-        // Internal HTML pages
         window.location.href = downloadLink;
     } else if (downloadLink === '#') {
-        // Links that are not ready
         alert('⚠️ Download link for this game is not available yet. Please check back later or contact us.');
     } else {
-        // Fallback for any other links
         window.open(downloadLink, '_blank');
     }
 }
 
-// Function to get random trending games (changes every 10 seconds)
 function getRandomTrendingGames() {
-    // Create a shuffled array of games
     const shuffledGames = [...games].sort(() => Math.random() - 0.5);
-    
-    // Select 5 random games
     return shuffledGames.slice(0, 5);
 }
 
-// Simple string hash function for consistent random selection
 function stringHash(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
         const char = str.charCodeAt(i);
         hash = ((hash << 5) - hash) + char;
-        hash = hash & hash; // Convert to 32bit integer
+        hash = hash & hash;
     }
     return Math.abs(hash);
 }
 
-// Function to check if trending games need to be updated
 function shouldUpdateTrendingGames() {
     const lastUpdate = localStorage.getItem('trendingLastUpdate');
     const today = new Date().toDateString();
@@ -280,6 +665,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScrolling();
     handleDirectGameLinks();
     initThemeToggle();
+    initActiveNav();
+    initMobileOptimizations();
+    initAIAssistant(); // Initialize AI
     
     // Auto-update trending games every 10 seconds
     setInterval(loadTrendingGames, 10000);
@@ -310,24 +698,18 @@ function loadTrendingGames() {
     
     trendingTrack.innerHTML = '';
     
-    // Get random trending games (changes every time)
     const trendingGames = getRandomTrendingGames();
     
-    // Add trending property to games for display
     trendingGames.forEach(game => {
         game.trending = true;
     });
     
-    // Duplicate trending games for smooth continuous marquee
     const allTrendingGames = [...trendingGames, ...trendingGames, ...trendingGames];
     
     allTrendingGames.forEach(game => {
         const trendingCard = createTrendingCard(game);
         trendingTrack.appendChild(trendingCard);
     });
-    
-    // Update trending games counter in console
-    console.log(`Updated trending games (${trendingGames.length}):`, trendingGames.map(g => g.name));
 }
 
 // Create trending game card
@@ -410,10 +792,8 @@ function handleImageError(img) {
 // Initialize theme toggle
 function initThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
-    // Set default theme to dark
     const savedTheme = localStorage.getItem('theme') || 'dark';
     
-    // Set initial theme
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeButton(savedTheme);
     
@@ -673,293 +1053,64 @@ function shareWebsite() {
     }
 }
 
-// ===== AI ASSISTANT FUNCTIONALITY =====
-let isAssistantOpen = false;
-
-function toggleAssistant() {
-    const assistantWindow = document.getElementById('assistantWindow');
-    isAssistantOpen = !isAssistantOpen;
+// Active Navigation Function
+function initActiveNav() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
     
-    if (isAssistantOpen) {
-        assistantWindow.style.display = 'flex';
-        setTimeout(() => {
-            assistantWindow.style.transform = 'translateY(0)';
-            assistantWindow.style.opacity = '1';
-        }, 10);
-        document.getElementById('userQuestion').focus();
-    } else {
-        assistantWindow.style.transform = 'translateY(20px)';
-        assistantWindow.style.opacity = '0';
-        setTimeout(() => {
-            assistantWindow.style.display = 'none';
-        }, 300);
-    }
-}
-
-function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-        handleUserQuestion();
-    }
-}
-
-function askQuickQuestion(question) {
-    document.getElementById('userQuestion').value = question;
-    handleUserQuestion();
-}
-
-function handleUserQuestion() {
-    const userInput = document.getElementById('userQuestion');
-    const question = userInput.value.trim();
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
     
-    if (!question) return;
-    
-    // Display user message
-    addMessage(question, 'user');
-    userInput.value = '';
-    
-    // Process and respond
-    setTimeout(() => {
-        const response = generateAIResponse(question);
-        addMessage(response, 'bot');
-    }, 1000);
-}
-
-function addMessage(content, sender) {
-    const messagesContainer = document.getElementById('assistantMessages');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${sender}-message`;
-    
-    messageDiv.innerHTML = `
-        <div class="message-content">${content}</div>
-    `;
-    
-    messagesContainer.appendChild(messageDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
-
-function generateAIResponse(question) {
-    const lowerQuestion = question.toLowerCase();
-    
-    // 🔐 PIN-RELATED QUESTIONS - MUHIMU KABISA!
-    if (lowerQuestion.includes('pin') || lowerQuestion.includes('pini') || 
-        lowerQuestion.includes('premium') || lowerQuestion.includes('lipia') ||
-        lowerQuestion.includes('bei') || lowerQuestion.includes('pesa') ||
-        lowerQuestion.includes('money') || lowerQuestion.includes('cost') ||
-        lowerQuestion.includes('price') || lowerQuestion.includes('unlock') ||
-        lowerQuestion.includes('locked') || lowerQuestion.includes('fungua')) {
+    window.addEventListener('scroll', function() {
+        let current = '';
+        const scrollPos = window.scrollY + 100;
         
-        return `🔐 <strong>KUHUSU PIN ZA GAMES PREMIUM:</strong><br><br>
-        Kwa kupata PIN ya game yoyote premium:<br>
-        • <strong>Tuma neno "PIN" kwenye WhatsApp: <span style="color:#667eea">0671131355</span></strong><br>
-        • Utapata PIN haraka kwa bei nafuu<br>
-        • Tunakupigia simu mara moja ukiitumia<br>
-        • Pia tunaweza kukusaidia kuinstall game<br><br>
-        <em>📞 Piga simu au tuma WhatsApp: <strong>0671131355</strong></em>`;
-    }
-    
-    // 🆓 FREE GAMES
-    if (lowerQuestion.includes('free') || lowerQuestion.includes('bure') || 
-        lowerQuestion.includes('hapana pesa') || lowerQuestion.includes('no money') ||
-        lowerQuestion.includes('complimentary') || lowerQuestion.includes('without pay')) {
-        return `🆓 <strong>GAMES ZA BURE:</strong><br><br>
-        Tuna games nyingi za bure! Zifuatazo ni baadhi tu:<br>
-        • eFootball 26 PPSSPP<br>
-        • Bright Memory Infinite<br>
-        • DLS 26 MOD FC 26<br>
-        • GTA San Andreas<br>
-        • God Hand<br>
-        • God of War 1<br>
-        • Mortal Kombat<br>
-        • Tomb Raider<br>
-        • European Front Remastered<br>
-        • FTS 26<br><br>
-        <em>Bonyeza "FREE GAMES" kwenye filter au tafuta game unayotaka!</em>`;
-    }
-    
-    // 📥 DOWNLOAD HELP
-    if (lowerQuestion.includes('download') || lowerQuestion.includes('pakua') ||
-        lowerQuestion.includes('install') || lowerQuestion.includes('weka') ||
-        lowerQuestion.includes('sakinisha') || lowerQuestion.includes('set up') ||
-        lowerQuestion.includes('saved') || lowerQuestion.includes('save')) {
-        return `📥 <strong>MSAADA WA DOWNLOAD & INSTALLATION:</strong><br><br>
-        Ikiwa una shida ya kudownload au kuinstall:<br>
-        • Hakikisha una internet nzuri na imetosheleza<br>
-        • Tumia browser ya Chrome kwa download bora<br>
-        • Angalia storage ya simu inatosheleze<br>
-        • Kwa games za PSP, unahitaji PPSSPP emulator kwanza<br>
-        • Ikiwa file ni .zip au .rar, unahitaji app ya kufungua<br>
-        • Kama bado shida, piga: <strong>0671131355</strong>`;
-    }
-    
-    // 🎮 GAME RECOMMENDATIONS
-    if (lowerQuestion.includes('pendekeza') || lowerQuestion.includes('zuri') ||
-        lowerQuestion.includes('kali') || lowerQuestion.includes('bora') ||
-        lowerQuestion.includes('mpira') || lowerQuestion.includes('soka') ||
-        lowerQuestion.includes('football') || lowerQuestion.includes('action') ||
-        lowerQuestion.includes('adventure') || lowerQuestion.includes('racing') ||
-        lowerQuestion.includes('sports') || lowerQuestion.includes('fighting')) {
-        return `🎮 <strong>GAMES BORA KULINGANA NA AINA:</strong><br><br>
-        <strong>Kwa wapenzi wa MPIRA:</strong><br>
-        • eFootball 26 PPSSPP (BURE)<br>
-        • FTS 25 NBC Mod (PREMIUM)<br>
-        • DLS 26 MOD FC 26 (BURE)<br>
-        • FC 26 Mod FIFA 26 (PREMIUM)<br><br>
-        <strong>Kwa wapenzi wa ACTION:</strong><br>
-        • God of War 1 (BURE)<br>
-        • Bright Memory Infinite (BURE)<br>
-        • Mortal Kombat (BURE)<br>
-        • UFC 5 (PREMIUM)<br><br>
-        <strong>Kwa wapenzi wa RACING/DRIVING:</strong><br>
-        • Pinodeire World Bus (PREMIUM)<br><br>
-        <em>Unaweza kutumia search kwa kupata games za aina unayotaka!</em>`; 
-    }
-    
-    // 📱 TECHNICAL SUPPORT
-    if (lowerQuestion.includes('tatizo') || lowerQuestion.includes('shida') ||
-        lowerQuestion.includes('haifanyi') || lowerQuestion.includes('crash') ||
-        lowerQuestion.includes('error') || lowerQuestion.includes('siwezi') ||
-        lowerQuestion.includes('not working') || lowerQuestion.includes('problem') ||
-        lowerQuestion.includes('issue') || lowerQuestion.includes('fix') ||
-        lowerQuestion.includes('broken') || lowerQuestion.includes('corrupt')) {
-        return `🔧 <strong>MSAADA WA KI-TECHNICAL:</strong><br><br>
-        Kama game haifanyi kazi vizuri:<br>
-        • Hakikisha simu yako ina Android 6.0 au juu zaidi<br>
-        • Angalia storage inatosheleze (angalia kwenye Settings)<br>
-        • Kama ni game la PSP, weka PPSSPP emulator kwanza<br>
-        • Jaribu kui-restart simu yako<br>
-        • Hakikisha umedownload game vizuri<br>
-        • Ikiwa bado shida, piga: <strong>0671131355</strong> kwa msaada wa haraka`;
-    }
-    
-    // 🆕 NEW GAMES & UPDATES
-    if (lowerQuestion.includes('mpya') || lowerQuestion.includes('update') ||
-        lowerQuestion.includes('latest') || lowerQuestion.includes('mengine') ||
-        lowerQuestion.includes('new') || lowerQuestion.includes('fresh') ||
-        lowerQuestion.includes('recent') || lowerQuestion.includes('added')) {
-        return `🆕 <strong>GAMES MPYA & UPDATES:</strong><br><br>
-        Tunazidi kuongeza games mpya kila siku! Baadhi ya games mpya:<br>
-        • FTS 26 - Update mpya<br>
-        • DLS 26 MOD FC 26<br>
-        • eFootball 26 PPSSPP<br>
-        • Bright Memory Infinite<br><br>
-        Tunatafuta kuongeza zaidi kama:<br>
-        • FIFA 26 updates<br>
-        • GTA VI (inapotoka)<br>
-        • Call of Duty Mobile mods<br>
-        • Na mengine mengi!<br><br>
-        <em>Fuata YouTube channel yetu kwa updates: @funzone-g7</em>`;
-    }
-    
-    // ℹ️ ABOUT FUNZONE
-    if (lowerQuestion.includes('funzone') || lowerQuestion.includes('wenu') ||
-        lowerQuestion.includes('legit') || lowerQuestion.includes('salama') ||
-        lowerQuestion.includes('safe') || lowerQuestion.includes('trust') ||
-        lowerQuestion.includes('real') || lowerQuestion.includes('authentic') ||
-        lowerQuestion.includes('about') || lowerQuestion.includes('kuhusu')) {
-        return `ℹ️ <strong>KUHUSU FUNZONE:</strong><br><br>
-        • Tunatoa games za kiwango cha juu za simu<br>
-        • Games zote ni SAFE bila virus - tunazitest kwanza<br>
-        • Tuna msaada 24/7 kwa WhatsApp na simu<br>
-        • Tumeanzishwa mwaka 2025<br>
-        • Creator: SCOBA77<br>
-        • Lengo: Kuwapa watu games bora kwa bei nafuu<br><br>
-        <em>📞 Wasiliana nasi: <strong>0671131355</strong></em>`;
-    }
-    
-    // 🎯 SPECIFIC GAME QUESTIONS
-    if (lowerQuestion.includes('fifa') || lowerQuestion.includes('pes') || 
-        lowerQuestion.includes('efootball') || lowerQuestion.includes('soccer') ||
-        lowerQuestion.includes('dls') || lowerQuestion.includes('dream league') ||
-        lowerQuestion.includes('fts') || lowerQuestion.includes('first touch') ||
-        lowerQuestion.includes('gta') || lowerQuestion.includes('grand theft') ||
-        lowerQuestion.includes('god of war') || lowerQuestion.includes('mortal kombat') ||
-        lowerQuestion.includes('ufc') || lowerQuestion.includes('fighting') ||
-        lowerQuestion.includes('bus') || lowerQuestion.includes('basi') ||
-        lowerQuestion.includes('spider') || lowerQuestion.includes('spiderman')) {
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
         
-        const gameNames = ['fifa', 'pes', 'efootball', 'dls', 'fts', 'gta', 'god of war', 'mortal kombat', 'ufc', 'bus', 'spider'];
-        const foundGame = gameNames.find(gameName => lowerQuestion.includes(gameName));
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+}
+
+// Mobile Optimizations
+function initMobileOptimizations() {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isSmallScreen = window.innerWidth <= 480;
+    
+    if (isMobile || isSmallScreen) {
+        document.body.classList.add('mobile-device');
         
-        if (foundGame) {
-            return `🎮 <strong>KUHUSU GAME LA ${foundGame.toUpperCase()}:</strong><br><br>
-            Ninaweza kukupa maelezo zaidi kuhusu game hili!<br>
-            • Angalia kwenye orodha ya games hapo juu<br>
-            • Tumia search box kwa kuiita kwa jina lake<br>
-            • Kama ni premium, tuma "PIN" kwa: <strong>0671131355</strong><br>
-            • Kama ni bure, download moja kwa moja!<br><br>
-            <em>Una swali maalum kuhusu game hili? Uliza tu!</em>`;
-        }
+        const style = document.createElement('style');
+        style.textContent = `
+            .trending-track {
+                animation-duration: 40s !important;
+            }
+            
+            .pulse-effect {
+                animation-duration: 3s !important;
+            }
+            
+            .neon-glow, .search-glow-effect {
+                animation-duration: 6s !important;
+            }
+        `;
+        document.head.appendChild(style);
     }
-    
-    // 📞 CONTACT & SUPPORT
-    if (lowerQuestion.includes('contact') || lowerQuestion.includes('wasiliana') ||
-        lowerQuestion.includes('support') || lowerQuestion.includes('msaada') ||
-        lowerQuestion.includes('help') || lowerQuestion.includes('saidia') ||
-        lowerQuestion.includes('call') || lowerQuestion.includes('piga') ||
-        lowerQuestion.includes('whatsapp') || lowerQuestion.includes('message')) {
-        return `📞 <strong>MAWASILIANO NA MSAADA:</strong><br><br>
-        Tupatie simu au tuma WhatsApp kwa:<br>
-        • Kupata PIN za games premium<br>
-        • Msaada wa ki-technical<br>
-        • Maswali yoyote kuhusu games<br>
-        • Mapendekezo ya games mpya<br><br>
-        <strong>📱 Namba ya simu/WhatsApp: <span style="color:#667eea">0671131355</span></strong><br>
-        <em>Huduma 24/7 - Tuna respond haraka!</em>`;
-    }
-    
-    // 🕒 AVAILABILITY & TIMING
-    if (lowerQuestion.includes('muda') || lowerQuestion.includes('time') ||
-        lowerQuestion.includes('saa') || lowerQuestion.includes('hour') ||
-        lowerQuestion.includes('available') || lowerQuestion.includes('patikana') ||
-        lowerQuestion.includes('open') || lowerQuestion.includes('fungua')) {
-        return `🕒 <strong>MUDA WA HUDUMA:</strong><br><br>
-        Tunakupa huduma:<br>
-        • <strong>Kila siku - 24/7</strong><br>
-        • Msaada wa haraka kwenye WhatsApp<br>
-        • Response within minutes<br>
-        • Usiku na mchana<br><br>
-        <em>Hata kama ni usiku, tuma ujumbe - tutakujibu!</em>`;
-    }
-    
-    // 💰 PAYMENT METHODS
-    if (lowerQuestion.includes('malipo') || lowerQuestion.includes('payment') ||
-        lowerQuestion.includes('lipa') || lowerQuestion.includes('pay') ||
-        lowerQuestion.includes('tuma pesa') || lowerQuestion.includes('send money') ||
-        lowerQuestion.includes('mpesa') || lowerQuestion.includes('airtel money') ||
-        lowerQuestion.includes('tigo pesa') || lowerQuestion.includes('halopesa')) {
-        return `💰 <strong>NJIA ZA KULIPIA:</strong><br><br>
-        Kwa sasa tunakubali:<br>
-        • <strong>M-Pesa</strong> (Tanzania)<br>
-        • <strong>Airtel Money</strong><br>
-        • <strong>Tigo Pesa</strong><br>
-        • <strong>HaloPesa</strong><br><br>
-        <em>Bei za PIN ni nafuu! Tuma "PIN" kwa <strong>0671131355</strong> kujua bei halisi</em>`;
-    }
-    
-    // 🎮 EMULATOR & PSP GAMES
-    if (lowerQuestion.includes('emulator') || lowerQuestion.includes('ppsspp') ||
-        lowerQuestion.includes('psp') || lowerQuestion.includes('iso') ||
-        lowerQuestion.includes('rom') || lowerQuestion.includes('console')) {
-        return `🎮 <strong>KUHUSU PSP GAMES NA EMULATOR:</strong><br><br>
-        Kwa games za PSP kama eFootball 26, UFC 5, nk:<br>
-        • Unahitaji <strong>PPSSPP Emulator</strong> kwanza<br>
-        • Tunaweza kukusaidia kuipata na kuiset up<br>
-        • Games za PSP huwa na graphics nzuri<br>
-        • Zinafanya kazi kwenye simu nyingi<br><br>
-        <em>Piga <strong>0671131355</strong> kwa msaada wa kuweka emulator</em>`;
-    }
-    
-    // DEFAULT RESPONSE
-    return `🤖 <strong>Nimekuelewa swali lako!</strong><br><br>
-    Ninaweza kukusaidia kupata:<br>
-    • 🔐 PIN za games premium<br>
-    • 🆓 Orodha ya games bure<br>
-    • 📥 Msaada wa download & installation<br>
-    • 🎮 Mapendekezo ya games<br>
-    • 🔧 Suluhisho la matatizo ya ki-technical<br>
-    • ℹ️ Maelezo kuhusu FunZone<br><br>
-    <strong>Au piga simu moja kwa moja: <span style="color:#667eea">0671131355</span></strong><br>
-    <em>Huduma 24/7 - Tuna respond haraka!</em>`;
 }
 
 // Add search highlight style
