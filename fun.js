@@ -181,6 +181,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 26,
+        name: "GTA VISE CITY",
+        image: "vise.jpg",
+        description: " download game lako pendwa la GTA vise city apk high graphic",
+        downloadLink: "https://cdn900.onehost.io/customs/Grand_Theft_Auto_Vice_City_v112_1757613235.apk",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 15,
         name: "tomb raider",
         image: "tomb.jpg",
