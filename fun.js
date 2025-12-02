@@ -172,6 +172,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 27,
+        name: "modern combat 4",
+        image: "mc.jpg",
+        description: " download game la modern combat 4(unlimited money and unlocked items)",
+        downloadLink: "mc.html",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 22,
         name: "wwe",
         image: "wwe.jpg",
@@ -195,6 +204,15 @@ const games = [
         image: "tomb.jpg",
         description: "download and enjoy tomb rider PSP games for free",
         downloadLink: "https://www.mediafire.com/file/es2j8qzf51o5aol/Tomb+Raider+-+Anniversary+(USA)+(PSP)+(PSN).zip/file",
+        type: "free",
+        pinRequired: false
+    },
+    {
+        id: 28,
+        name: "Batman dark knight rises",
+        image: "batman.jpg",
+        description: "download and enjoy tomb rider PSP games for free",
+        downloadLink: "batman.html",
         type: "free",
         pinRequired: false
     },
