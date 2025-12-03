@@ -145,6 +145,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 29,
+        name: "Maleo mod tz (ramani ya singida)",
+        image: "maleo.jpg",
+        description: "download game la Maleo mod tz lenye ramani ya singida na ufulahie wakati ukicheza ",
+        downloadLink: "https://www.mediafire.com/file/6zvue8ep7n6n46q/BUS+TANZANIA+GAME+LA+BUS+FILE+ZOTE+NIPO+HAPA+KUPATA+PASSWORD+TUMA+NENO+BUS+KWENDA+NAMBA+0686350237+AU+0672550237+RAMANI+ZIPO.7z/file",
+        type: "premium",
+        pinRequired: true
+    },
+    {
         id: 16,
         name: "European front remastered",
         image: "eu.jpg",
