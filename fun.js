@@ -103,7 +103,7 @@ const games = [
         id: 7,
         name: "god of war 1",
         image: "war.jpg",
-        description: "god of war 1 .",
+        description: "download game Kali la god of war 1 kwa free kabisa",
         downloadLink: "https://www.mediafire.com/file/zsj8ckt6ftdlhrq/God+of+War+1+Vampire+Edition.iso/file",
         type: "free",
         pinRequired: false
@@ -267,6 +267,15 @@ const games = [
         image: "wydad.jpg",
         description: "download and enjoy dls game wydad mod for free",
         downloadLink: "dls.html",
+        type: "free",
+        pinRequired: false
+    },
+    {
+        id: 31,
+        name: "race max pro (unlimited money)",
+        image: "race.jpg",
+        description: "downlod game la race max pro unlimited money na ulifurahie",
+        downloadLink: "https://dl.apkvision.org/race-max-pro/race-max-pro-mod_2.8.3-apkvision.apk",
         type: "free",
         pinRequired: false
     },
