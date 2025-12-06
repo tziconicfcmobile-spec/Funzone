@@ -167,7 +167,16 @@ const games = [
         name: "call of duty warzone",
         image: "zone.jpg",
         description: "download call of duty warzone for free and enjoy it while you play intire war game",
-        downloadLink: "https://d.apkpure.net/b/XAPK/com.activision.callofduty.warzone?version=latest",
+        downloadLink: "https://dl.apkvision.org/call-of-duty-warzone-mobile/call-of-duty-warzone-mobile-98889_4.5.2.22729281-apkvision.apk",
+        type: "free",
+        pinRequired: false
+    },
+    {
+        id: 33,
+        name: "wall of insanity 2 (hacked vision)",
+        image: "wall.jpg",
+        description: "download game la wall of insanity 2 kwa wale wapenzi wa hollow games hii ni kazi yenu",
+        downloadLink: "https://dl.apkvision.org/wall-of-insanity-2/Wall-Of-Insanity-2-v1.3-mod-menu-apkvision.apk",
         type: "free",
         pinRequired: false
     },
@@ -239,7 +248,7 @@ const games = [
         name: "Red dead redemption mobile apk",
         image: "red.jpg",
         description: "downoad game la red dead redemption apk high graphic for free",
-        downloadLink: "https://dl.apkvision.org/red-dead-redemption-netflix/RDR-NETFLIX-v1.50.60293175-unlocked-apkvision.apks",
+        downloadLink: "https://dl.apkvision.org/red-dead-redemption/RDR-ROCKSTAR-v1.50.60293175-full-apkvision.apks",
         type: "free",
         pinRequired: false
     },
