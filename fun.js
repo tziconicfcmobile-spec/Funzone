@@ -253,6 +253,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 32,
+        name: "drive real truck simulator (unlimited money)",
+        image: "drive.jpg",
+        description: "download game la drive real truck simulator unlimited money 💲",
+        downloadLink: "https://dl.apkvision.org/drive-real-truck-simulator/Drive-Real-Truck-Simulator-v0.5.4-mod-apkvision.apk",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 20,
         name: "Amizing spider-man 2",
         image: "spider.jpg",
