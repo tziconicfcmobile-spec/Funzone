@@ -199,6 +199,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 34,
+        name: "efootball 26 psp",
+        image: "yamali.jpg",
+        description: "download game la mpira la efootball 26 la PSP for free ",
+        downloadLink: "yamali.html",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 22,
         name: "wwe",
         image: "wwe.jpg",
