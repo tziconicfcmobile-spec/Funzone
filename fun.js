@@ -262,11 +262,20 @@ const games = [
         pinRequired: false
     },
     {
+        id: 35,
+        name: "Gta liberty city ppsspp",
+        image: "liberty.jpg",
+        description: "download game la GTA liberty city la PSP na huinjoy hukiwa unacheza game hili la psp",
+        downloadLink: "https://www.mediafire.com/file/xvhjzb1nzex72yo/elkingofthemusicall%252C_Inc.rar/file",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 21,
         name: "mortal Kombat unchained ppsspp",
         image: "unchained.jpg",
         description: "download mortal Kombat unchained PSP for free",
-        downloadLink: "https://www.mediafire.com/file/kfy8t8f45fu49w3/1SOPSPGAME%252310.zip/file",
+        downloadLink: "https://www.mediafire.com/file/par831qvb13r6mm/elkingofthemusicall%252C_Inc.rar/file",
         type: "free",
         pinRequired: false
     },
@@ -303,6 +312,15 @@ const games = [
         image: "race.jpg",
         description: "downlod game la race max pro unlimited money na ulifurahie",
         downloadLink: "https://dl.apkvision.org/race-max-pro/race-max-pro-mod_2.8.3-apkvision.apk",
+        type: "free",
+        pinRequired: false
+    },
+    {
+        id: 36,
+        name: "spider man 3 PPSSPP",
+        image: "man3.jpg",
+        description: "downlod game lako pendwa la spider man 3 linalo chezwa kwenye psp emulator ",
+        downloadLink: "https://www.mediafire.com/file/58ke49en0e22ug2/elkingofthemusicall%252C_Inc.rar/file",
         type: "free",
         pinRequired: false
     },
