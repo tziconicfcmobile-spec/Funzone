@@ -298,6 +298,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 37,
+        name: "Days after: zombie survival",
+        image: "days.jpg",
+        description: "download game la days after zombie survival ili kuexperience how you can survival from zombies invasion",
+        downloadLink: "https://dl.apkvision.org/days-after-zombie-survival/days-after-mod_12.8.2-apkvision.apk",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 17,
         name: "dls 26 wydad mod",
         image: "wydad.jpg",
