@@ -325,6 +325,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 38,
+        name: "bus simulator Indonesia (unlimited fuel)",
+        image: "fuel.jpg",
+        description: "download now bus simulator Indonesia mod unlimited fuel and enjoy while you play it",
+        downloadLink: "https://dl.apkvision.org/bus-simulator-indonesia/bus-simulator-indonesia-mod_4.4.1-apkvision.apk",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 36,
         name: "spider man 3 PPSSPP",
         image: "man3.jpg",
