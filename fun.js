@@ -289,6 +289,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 39,
+        name: "aerofly fs global (free aircraft purchase)",
+        image: "aerofly.jpg",
+        description: "download game la aerofly fs global huexpirience kupaisha ndege kama malubani wengine",
+        downloadLink: "https://dl.apkvision.org/aerofly-fs-global/Aerofly-FS-Global-v01.06.01.02-mod-apkvision.apk",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 20,
         name: "Amizing spider-man 2",
         image: "spider.jpg",
