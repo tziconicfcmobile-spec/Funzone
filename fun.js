@@ -164,10 +164,10 @@ const games = [
     },
     {
         id: 25,
-        name: "call of duty warzone",
-        image: "zone.jpg",
-        description: "download call of duty warzone for free and enjoy it while you play intire war game",
-        downloadLink: "https://dl.apkvision.org/call-of-duty-warzone-mobile/call-of-duty-warzone-mobile-98889_4.5.2.22729281-apkvision.apk",
+        name: "watching dogs mobile",
+        image: "dogs.jpg",
+        description: "download watching dogs mobile for free and enjoy it while you play intire war game",
+        downloadLink: "https://dl.apkvision.org/watch-dogs/WatchDogsMobileV1.2-apkvision.org.apk",
         type: "free",
         pinRequired: false
     },
@@ -299,10 +299,10 @@ const games = [
     },
     {
         id: 20,
-        name: "Amizing spider-man 2",
-        image: "spider.jpg",
-        description: "download spider-man amazing 2 for free and enjoy while playing it",
-        downloadLink: "spider.html",
+        name: "left to survival",
+        image: "left.jpg",
+        description: "download left to survival mobile for free and enjoy while playing it",
+        downloadLink: "https://dl.apkvision.org/left-to-survive/left-to-survive-mod_8.1.0-apkvision.apk",
         type: "free",
         pinRequired: false
     },
