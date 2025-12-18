@@ -361,6 +361,15 @@ const games = [
         pinRequired: false
     },
     {
+        id: 42,
+        name: "football league 26 mod (all team also all play with their likeness)",
+        image: "l.jpg",
+        description: "download now football league 26 with all team and players and enjoy while you play it",
+        downloadLink: "l.html",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 36,
         name: "spider man 3 PPSSPP",
         image: "man3.jpg",
