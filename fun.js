@@ -239,7 +239,7 @@ const games = [
         name: "GTA iv mod unlimited money",
         image: "iv.jpg",
         description: "download and enjoy GTA iv mod unlimited money for free",
-        downloadLink: "https://files.apktodo.store/gta-4_0.1.apk",
+        downloadLink: "https://dl.apkvision.org/gta-4/GTA-4-Mobile-Edition-1.0-by-Freaky-Studios.apk",
         type: "free",
         pinRequired: false
     },
@@ -267,6 +267,15 @@ const games = [
         image: "red.jpg",
         description: "downoad game la red dead redemption apk high graphic for free",
         downloadLink: "https://dl.apkvision.org/red-dead-redemption/RDR-ROCKSTAR-v1.50.60293175-full-apkvision.apks",
+        type: "free",
+        pinRequired: false
+    },
+    {
+        id: 41,
+        name: "bendy and the dark revival",
+        image: "b.jpg",
+        description: "downoad game la bendy and the dark revival apk high graphic for free",
+        downloadLink: "https://dl.apkvision.org/bendy-and-the-dark-revival/Dark-Revival-v1.0.0-full-apkvision.apk",
         type: "free",
         pinRequired: false
     },
