@@ -1,6 +1,15 @@
 // Games Data - Badilisha na games zako halisi
 const games = [
     {
+        id: 43,
+        name: "Fifa 16 original",
+        image: "o.jpg",
+        description: "download game la fifa 16 original kutoka kwenye our website na ukalicheze uku ukiwa unainjoy ambalo Lina timu zote na wachezaji na likeness zao.",
+        downloadLink: "o.html",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 1,
         name: "efootball 26 PPSSPP",
         image: "e.jpg",
