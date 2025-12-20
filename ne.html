@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .download-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 18px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .download-btn.apk {
+            background: linear-gradient(to right, #00b09b, #96c93d);
+        }
+        
+        .download-btn.data {
+            background: linear-gradient(to right, #ff512f, #f09819);
+        }
+        
+        .download-btn.obb {
+            background: linear-gradient(to right, #8e2de2, #4a00e0);
+        }
+        
+        .btn-icon {
+            font-size: 1.5rem;
+        }
+        
+        .btn-text {
+            flex-grow: 1;
+            text-align: center;
+        }
+        
+        .file-size {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+        
+        .instructions {
+            margin-top: 40px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .instructions p {
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .download-btn {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Download Center</h1>
+        <p class="subtitle">Get all the files you need for the application</p>
+        
+        <div class="download-section">
+            <a href="https://dl.apkvision.org/need-for-speed-most-wanted/need-for-speed-most-wanted-v1.3.128-mod-money.apk" target="_blank" class="download-btn apk">
+                <span class="btn-icon">📱</span>
+                <span class="btn-text">Download APK <span class="file-size">(Android Package)</span></span>
+                <span class="btn-icon">⬇️</span>
+            </a>
+            <a href="https://dl.apkvision.org/need-for-speed-most-wanted-v1.3.128-cache-apkvision.zip" target="_blank" class="download-btn obb">
+                <span class="btn-icon">📦</span>
+                <span class="btn-text">Download cache<span class="file-size">(Expansion Files)</span></span>
+                <span class="btn-icon">⬇️</span>
+            </a>
+        </div>
+        
+        <div class="instructions">
+            <h3>Installation Instructions:</h3>
+                        <p>1. Download all three files (APK and obb)</p>
+            <p>2. Install the APK file first (allow installation from unknown sources)</p>
+            <p>3. Extract the data file to the appropriate folders</p>
+            <p>4. Launch the application and enjoy!</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple animation for buttons on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.download-btn');
+            
+            buttons.forEach((button, index) => {
+                // Add slight delay for each button
+                setTimeout(() => {
+                    button.style.opacity = '0';
+                    button.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        button.style.transition = 'all 0.5s ease';
+                        button.style.opacity = '1';
+                        button.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>            

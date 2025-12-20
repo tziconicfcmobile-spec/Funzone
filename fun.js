@@ -10,11 +10,29 @@ const games = [
         pinRequired: false
     },
     {
+        id: 44,
+        name: "spider man mile morales mobile",
+        image: "mile.jpg",
+        description: "download game la spider man mile morales mobile kwa free kabisa kupitia website yetu ",
+        downloadLink: "https://dl.apkvision.org/spider-man-miles-morales/spider-man-miles-morales-v1.15.b2.apk",
+        type: "free",
+        pinRequired: false
+    },
+    {
         id: 1,
         name: "efootball 26 PPSSPP",
         image: "e.jpg",
         description: "efootball 26 | offline game | PPSSPP EMULATOR.",
         downloadLink: "https://www.mediafire.com/file/xet3s2ofesp5do4/eFootball_2026_GAME.zip/file",
+        type: "free",
+        pinRequired: false
+    },
+    {
+        id: 45,
+        name: "TRUCK SIMULATOR USA EVO mod money/gold",
+        image: "t.jpg",
+        description: "download game pendwa la kusafilisha mizigo la truck simulator USA EVO.",
+        downloadLink: "https://dl.apkvision.org/truck-simulator-usa-revolution/truck-simulator-usa-mod_10.0.18-apkvision.apk",
         type: "free",
         pinRequired: false
     },
@@ -76,8 +94,17 @@ const games = [
         id: 9,
         name: "god hand",
         image: "hand.jpg",
-        description: "god hand.",
+        description: "download game la god hand linalo chezwa kwenye emulator ya aether sx2",
         downloadLink: "https://www.mediafire.com/file/9gefs9uyr0o5co7/GOD+HAND+HACK+EDITION.iso/file",
+        type: "free",
+        pinRequired: false
+    },
+    {
+        id: 46,
+        name: "PUBG MOBILE LITE",
+        image: "pu.jpg",
+        description: "download game la PUBG MOBILE LITE, hii ni kwa wale wote ambao simu zao Zina lamu ndogo wakashindwa kulidownload hili game pia kama simu yako inauwezo unaweza kudownload pia",
+        downloadLink: "pu.html",
         type: "free",
         pinRequired: false
     },
@@ -91,11 +118,20 @@ const games = [
         pinRequired: true
     },
     {
+        id: 47,
+        name: "need for speed most wanted mobile",
+        image: "ne.jpg",
+        description: "download na huenjoy game lako la need for speed most wanted",
+        downloadLink: "ne.html",
+        type: "free", 
+        pinRequired: false
+    },
+    {
         id: 6,
         name: "mortal combat",
         image: "mortal.png",
         description: "download na huenjoy game lako la mortal kombat",
-        downloadLink: "#",
+        downloadLink: "https://www.mediafire.com/file/par831qvb13r6mm/elkingofthemusicall%252C_Inc.rar/file",
         type: "free", 
         pinRequired: false
     },
