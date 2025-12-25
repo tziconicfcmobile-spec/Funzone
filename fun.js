@@ -362,7 +362,7 @@ const games = [
     },
     {
         id: 49,
-        name: "Red Dead Redemption Mobile",
+        name: "blur",
         image: "blur.jpg",
         description: "download game la blur ambalo utacheza kwenye PC yako na pia kwa simu yako kwa kutumia emulator.",
         downloadLink: "https://www.mediafire.com/file/2678sh5ac7c9053/%2540B.lur.zip/file",
