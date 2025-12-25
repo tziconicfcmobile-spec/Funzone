@@ -15,7 +15,6 @@
     --shadow: 0 5px 20px rgba(0,0,0,0.3);
     --border-color: #333333;
     --section-bg: #1a1a1a;
-    --spin-duration: 4s;
 }
 
 [data-theme="light"] {
@@ -182,7 +181,6 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* Active nav link */
 .nav-link.active {
     background: rgba(255,255,255,0.2);
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -255,7 +253,7 @@ body {
 .trending-track {
     display: flex;
     gap: 2rem;
-    animation: marquee 30s linear infinite;
+    animation: marquee 40s linear infinite;
     padding: 1rem 0;
 }
 
@@ -289,19 +287,6 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.trending-card:hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to right, blue, purple);
-    opacity: 0.1;
-    z-index: 1;
-    border-radius: 15px;
-}
-
 .trending-badge {
     position: absolute;
     top: 12px;
@@ -315,7 +300,35 @@ body {
     z-index: 2;
 }
 
-/* ===== NEON SEARCH BAR WITH SPIN ANIMATION ===== */
+/* ===== CATEGORY FILTERS ===== */
+.category-filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.category-btn {
+    padding: 0.8rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    background: var(--card-bg);
+    color: var(--primary-color);
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Search Section */
 .search-section {
     background: var(--section-bg);
     padding: 2rem 0;
@@ -355,59 +368,9 @@ body {
     z-index: 10;
 }
 
-/* Neon glow effect for search input - MWANGA KUBWA */
 .search-input:focus {
-    border-color: #4d3fd0;
-    background: var(--card-bg);
-    box-shadow: 
-        0 0 20px rgba(77, 63, 208, 0.8),
-        0 0 40px rgba(77, 63, 208, 0.6),
-        0 0 60px rgba(77, 63, 208, 0.4);
-}
-
-/* Outer glow container for neon effect - MWANGA KUBWA */
-.search-glow-container {
-    position: absolute;
-    width: 105%;
-    height: 130%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    filter: blur(25px);
-    opacity: 0.8;
-    overflow: hidden;
-    border-radius: 60px;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.search-glow-effect {
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    background: conic-gradient(
-        from 60deg at 50% 50%,
-        transparent 0deg,
-        #4d3fd0 15deg,
-        #e830ba 60deg,
-        transparent 145deg,
-        #4d3fd0 215deg,
-        #e830ba 270deg,
-        transparent 325deg
-    );
-    animation: spin-effect var(--spin-duration) linear infinite;
-    opacity: 0.9;
-}
-
-@keyframes spin-effect {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
 }
 
 .search-icon {
@@ -468,7 +431,7 @@ body {
     border-radius: 2px;
 }
 
-/* ===== NEON GAME CARDS WITH SPIN ANIMATION ===== */
+/* ===== GAMES SECTION ===== */
 .games-section {
     padding: 4rem 0;
     background: var(--section-bg);
@@ -490,34 +453,13 @@ body {
     position: relative;
 }
 
-/* Neon border animation for game cards - WAZI SANA */
-.game-card::before {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: conic-gradient(
-        from 60deg at 50% 50%,
-        #4d3fd0 0deg,
-        #e830ba 60deg,
-        #4d3fd0 120deg,
-        #e830ba 180deg,
-        #4d3fd0 240deg,
-        #e830ba 300deg,
-        #4d3fd0 360deg
-    );
-    border-radius: 18px;
-    animation: spin-effect var(--spin-duration) linear infinite;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-    filter: blur(2px);
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 
-.game-card:hover::before {
-    opacity: 1;
+.game-card:hover .game-image {
+    transform: scale(1.05);
 }
 
 .game-card-content {
@@ -527,16 +469,6 @@ body {
     overflow: hidden;
     z-index: 2;
     height: 100%;
-    margin: 2px;
-}
-
-.game-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-}
-
-.game-card:hover .game-image {
-    transform: scale(1.05);
 }
 
 .game-image-container {
@@ -554,6 +486,37 @@ body {
     z-index: 2;
 }
 
+/* ===== CATEGORY BADGES ===== */
+.game-category-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    z-index: 3;
+}
+
+.badge-android {
+    background: #28a745;
+}
+
+.badge-psp {
+    background: #007bff;
+}
+
+.badge-pc {
+    background: #6f42c1;
+}
+
+.badge-emulator {
+    background: #fd7e14;
+}
+
+/* ===== FREE/PREMIUM BADGES ===== */
 .game-badge {
     position: absolute;
     top: 12px;
@@ -568,7 +531,7 @@ body {
 }
 
 .badge-free {
-    background: #28a745;
+    background: #20c997;
 }
 
 .badge-premium {
@@ -715,19 +678,6 @@ body {
 
 .feature-card:hover {
     transform: translateY(-5px);
-}
-
-.feature-card:hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to right, blue, purple);
-    opacity: 0.1;
-    z-index: 1;
-    border-radius: 15px;
 }
 
 .feature-icon {
@@ -905,7 +855,7 @@ body {
     transition: all 0.3s ease !important;
 }
 
-/* ===== AI ASSISTANT WITH NEON GLOW - FIXED ===== */
+/* ===== AI ASSISTANT ===== */
 #ai-assistant {
     position: fixed;
     bottom: 100px;
@@ -922,20 +872,14 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 
-        0 0 20px rgba(102, 126, 234, 0.8),
-        0 0 40px rgba(102, 126, 234, 0.6),
-        0 0 60px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
     transition: all 0.3s ease;
     position: relative;
 }
 
 .assistant-icon:hover {
     transform: scale(1.1);
-    box-shadow: 
-        0 0 30px rgba(102, 126, 234, 1),
-        0 0 60px rgba(102, 126, 234, 0.8),
-        0 0 90px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.7);
 }
 
 .assistant-emoji {
@@ -953,29 +897,6 @@ body {
     animation: pulse 2s infinite;
     opacity: 0.6;
     z-index: 1;
-}
-
-.neon-glow {
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    background: conic-gradient(
-        from 60deg at 50% 50%,
-        #4d3fd0 0deg,
-        #e830ba 60deg,
-        #4d3fd0 120deg,
-        #e830ba 180deg,
-        #4d3fd0 240deg,
-        #e830ba 300deg,
-        #4d3fd0 360deg
-    );
-    border-radius: 50%;
-    animation: spin-effect var(--spin-duration) linear infinite;
-    opacity: 0.7;
-    filter: blur(8px);
-    z-index: 0;
 }
 
 @keyframes pulse {
@@ -1001,9 +922,7 @@ body {
     height: 500px;
     background: var(--card-bg);
     border-radius: 15px;
-    box-shadow: 
-        0 10px 40px rgba(0,0,0,0.3),
-        0 0 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     border: 1px solid var(--border-color);
     display: none;
     flex-direction: column;
@@ -1063,3 +982,113 @@ body {
 .close-btn:hover {
     background: rgba(255,255,255,0.2);
 }
+
+.assistant-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.message {
+    max-width: 85%;
+    padding: 1rem;
+    border-radius: 15px;
+    line-height: 1.5;
+}
+
+.bot-message {
+    background: var(--section-bg);
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+.user-message {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+.message-content {
+    word-wrap: break-word;
+}
+
+.quick-questions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.quick-btn {
+    padding: 0.6rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--section-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.quick-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.assistant-input {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    gap: 0.5rem;
+}
+
+#userQuestion {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    background: var(--section-bg);
+    color: var(--text-color);
+    outline: none;
+}
+
+.send-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+    background: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .assistant-window {
+        width: 320px;
+     

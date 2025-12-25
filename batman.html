@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Center</title>
+    <title>Download Center - Batman Dark Knight Rises</title>
     <style>
         * {
             margin: 0;
@@ -22,12 +22,12 @@
         }
         
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             padding: 40px;
             text-align: center;
-            max-width: 600px;
+            max-width: 700px;
             width: 100%;
         }
         
@@ -39,14 +39,126 @@
         
         .subtitle {
             color: #666;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             font-size: 1.1rem;
+        }
+        
+        /* ===== NEW: GAME PREVIEW SECTION ===== */
+        .game-preview {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .preview-title {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        /* OPTION A: IFRAME */
+        .game-iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* OPTION B: IMAGE */
+        .game-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+        }
+        
+        /* OPTION C: VIDEO PLACEHOLDER */
+        .video-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #2c3e50, #4a235a);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>') center/50px no-repeat;
+            opacity: 0.2;
+        }
+        
+        .play-btn {
+            background: rgba(255, 0, 0, 0.8);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        
+        .play-btn:hover {
+            background: rgba(255, 0, 0, 1);
+            transform: scale(1.1);
+        }
+        
+        .video-link {
+            color: white;
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .video-link:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-3px);
+        }
+        
+        .image-caption {
+            color: #666;
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: 10px;
         }
         
         .download-section {
             display: flex;
             flex-direction: column;
             gap: 25px;
+            margin-top: 30px;
         }
         
         .download-btn {
@@ -117,6 +229,23 @@
             line-height: 1.5;
         }
         
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
         @media (max-width: 480px) {
             .container {
                 padding: 25px;
@@ -130,44 +259,136 @@
                 padding: 15px 20px;
                 font-size: 1rem;
             }
+            
+            .game-iframe, .video-placeholder {
+                height: 200px;
+            }
+            
+            .play-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Download Center</h1>
-        <p class="subtitle">Get all the files you need for the application</p>
+        <h1>🎮 Batman Dark Knight Rises</h1>
+        <p class="subtitle">Download the complete game package with mod features</p>
+        
+        <!-- ===== GAME PREVIEW SECTION ===== -->
+        <div class="game-preview">
+            <h2 class="preview-title">🎬 Game Preview</h2>
+            
+            <!-- OPTION 1: YouTube Video - FIXED URL -->
+            <!--
+            <iframe 
+                class="game-iframe" 
+                src="https://www.youtube.com/embed/wnxL8IWhd8I" 
+                title="Batman Dark Knight Rises Gameplay" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+            <p class="image-caption">Watch gameplay trailer on YouTube</p>
+            -->
+            
+            <!-- OPTION 2: Video Placeholder with Direct Link (SAFE OPTION) -->
+            <div class="video-placeholder">
+                <div class="play-btn">▶</div>
+                <h3 style="color: white; margin-bottom: 10px; z-index: 1;">Batman Dark Knight Rises Gameplay</h3>
+                <p style="color: rgba(255,255,255,0.8); text-align: center; padding: 0 20px; z-index: 1; margin-bottom: 15px;">
+                    Watch the official gameplay trailer on YouTube
+                </p>
+                <a href="https://youtu.be/wnxL8IWhd8I" class="video-link" target="_blank">
+                    <span>▶ Watch on YouTube</span>
+                </a>
+            </div>
+            <p class="image-caption">Click "Watch on YouTube" to view the gameplay trailer</p>
+            
+            <!-- OPTION 3: Direct Image (uncomment this and comment other options) -->
+            <!--
+            <img src="https://images.unsplash.com/photo-1633265486064-086b219458ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                 alt="Batman Dark Knight Rises Game" 
+                 class="game-image">
+            <p class="image-caption">Batman Dark Knight Rises - Action Game</p>
+            -->
+        </div>
         
         <div class="download-section">
-            <a href="https://apkvision.org/games/action/the-dark-knight-rises-13602/download/v1.1.6b-apk/" class="download-btn apk">
+            <a href="https://dl.apkvision.org/the-dark-knight-rises/the-dark-knight-rises-1.1.6b-mod-apkvision.apk" 
+               class="download-btn apk" 
+               target="_blank">
                 <span class="btn-icon">📱</span>
-                <span class="btn-text">Download APK mod<span class="file-size">(Android Package)</span></span>
+                <span class="btn-text">Download APK mod <span class="file-size">(Android Package)</span></span>
                 <span class="btn-icon">⬇️</span>
             </a>
             
-            <a href="https://apkvision.org/games/action/the-dark-knight-rises-13602/download/v1.1.6b-obb/" target="_blank" class="download-btn data">
+            <a href="https://dl.apkvision.org/the-dark-knight-rises/the-dark-knight-rises-1.1.6b-obb.zip" 
+               target="_blank" 
+               class="download-btn data">
                 <span class="btn-icon">🗃️</span>
-                <span class="btn-text">Download obb <span class="file-size">(Game/App Data)</span></span>
+                <span class="btn-text">Download OBB <span class="file-size">(Game Data Files)</span></span>
                 <span class="btn-icon">⬇️</span>
             </a>              
         </div>
         
         <div class="instructions">
-            <h3>Installation Instructions:</h3>
-            <p>1. Download all files</p>
-            <p>2. Install the APK file first (allow installation from unknown sources)</p>
-            <p>3. Extract the obb files to the appropriate folders</p>
-            <p>4. Launch the application and enjoy!</p>
+            <h3>📋 Installation Instructions:</h3>
+            <p>1. 📥 Download both files above</p>
+            <p>2. 🔓 Install the APK file (enable "Install from Unknown Sources" in Settings)</p>
+            <p>3. 📁 Extract OBB file to: <code>Android/obb/com.gameloft.android.ANMP.GloftKRHM/</code></p>
+            <p>4. 🎮 Launch the game and enjoy unlimited gameplay!</p>
+            <p>5. ⚡ For best performance, close other apps before playing</p>
         </div>
+        
+        <a href="index.html" class="back-btn">⬅️ Back to FunZone</a>
     </div>
 
     <script>
         // Simple animation for buttons on load
         document.addEventListener('DOMContentLoaded', function() {
             const buttons = document.querySelectorAll('.download-btn');
+            const preview = document.querySelector('.game-preview');
+            const videoPlaceholder = document.querySelector('.video-placeholder');
+            const playBtn = document.querySelector('.play-btn');
             
+            // Animate preview section
+            if (preview) {
+                preview.style.opacity = '0';
+                preview.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    preview.style.transition = 'all 0.5s ease';
+                    preview.style.opacity = '1';
+                    preview.style.transform = 'translateY(0)';
+                }, 300);
+            }
+            
+            // Animate video placeholder with pulse effect
+            if (videoPlaceholder) {
+                setTimeout(() => {
+                    videoPlaceholder.style.opacity = '0';
+                    setTimeout(() => {
+                        videoPlaceholder.style.transition = 'all 0.8s ease';
+                        videoPlaceholder.style.opacity = '1';
+                        
+                        // Add pulse animation to play button
+                        if (playBtn) {
+                            setInterval(() => {
+                                playBtn.style.transform = 'scale(1.05)';
+                                setTimeout(() => {
+                                    playBtn.style.transform = 'scale(1)';
+                                }, 500);
+                            }, 2000);
+                        }
+                    }, 100);
+                }, 600);
+            }
+            
+            // Animate buttons with delay
             buttons.forEach((button, index) => {
-                // Add slight delay for each button
                 setTimeout(() => {
                     button.style.opacity = '0';
                     button.style.transform = 'translateY(20px)';
@@ -177,9 +398,35 @@
                         button.style.opacity = '1';
                         button.style.transform = 'translateY(0)';
                     }, 100);
-                }, index * 200);
+                }, index * 200 + 800);
             });
+            
+            // Add click tracking for downloads
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const buttonType = this.classList.contains('apk') ? 'APK' : 'OBB';
+                    console.log(`Downloading ${buttonType} for Batman Dark Knight Rises`);
+                    // You can add analytics here
+                });
+            });
+            
+            // Make play button clickable
+            if (playBtn) {
+                playBtn.addEventListener('click', function() {
+                    window.open('https://youtu.be/wnxL8IWhd8I', '_blank');
+                });
+            }
+            
+            // Make entire video placeholder clickable
+            if (videoPlaceholder) {
+                videoPlaceholder.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on the link itself
+                    if (!e.target.closest('.video-link')) {
+                        window.open('https://youtu.be/wnxL8IWhd8I', '_blank');
+                    }
+                });
+            }
         });
     </script>
 </body>
-</html>                        
+</html>

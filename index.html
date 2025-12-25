@@ -56,7 +56,7 @@
         </div>
     </section>
 
-    <!-- Search Section -->
+    <!-- Search & Filter Section -->
     <section class="search-section">
         <div class="container">
             <div class="search-container">
@@ -64,9 +64,6 @@
                     <div class="search-input-container">
                         <input type="text" id="searchInput" class="search-input" placeholder="Search games by name...">
                         <span class="search-icon">🔍</span>
-                        <div class="search-glow-container">
-                            <div class="search-glow-effect"></div>
-                        </div>
                     </div>
                 </div>
                 <div class="filter-buttons">
@@ -74,6 +71,15 @@
                     <button class="filter-btn" data-filter="free">Free Games</button>
                     <button class="filter-btn" data-filter="premium">Premium Games</button>
                 </div>
+            </div>
+            
+            <!-- Categories Filter -->
+            <div class="category-filters">
+                <button class="category-btn active" data-category="all">All Platforms</button>
+                <button class="category-btn" data-category="android">Android</button>
+                <button class="category-btn" data-category="psp">PSP</button>
+                <button class="category-btn" data-category="pc">PC</button>
+                <button class="category-btn" data-category="emulator">Emulator</button>
             </div>
         </div>
     </section>
@@ -111,6 +117,11 @@
                     
                     <div class="features-grid">
                         <div class="feature-card">
+                            <div class="feature-icon">🎮</div>
+                            <h3>Multiple Platforms</h3>
+                            <p>Games for Android, PSP, PC, and Emulators</p>
+                        </div>
+                        <div class="feature-card">
                             <div class="feature-icon">🆓</div>
                             <h3>Free Games</h3>
                             <p>Download and play instantly without any PIN required</p>
@@ -124,11 +135,6 @@
                             <div class="feature-icon">🔒</div>
                             <h3>Safe Downloads</h3>
                             <p>All games are virus-free and tested for your safety</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">📱</div>
-                            <h3>Mobile Optimized</h3>
-                            <p>Games optimized for all Android devices</p>
                         </div>
                     </div>
                 </div>
@@ -153,7 +159,7 @@
                         <span class="contact-icon">✉️</span>
                         <div>
                             <h3>Email</h3>
-                            <p>not yet created</p>
+                            <p>funzonegames@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -182,7 +188,7 @@
         <div class="container">
             <p>&copy; 2025 FunZone. All rights reserved. | Safe Gaming Platform</p>
             <p>Share with friends and enjoy gaming! 🎮</p>
-            <p>created by SCOBA77</p>
+            <p>Created by SCOBA77</p>
         </div>
     </footer>
 
@@ -191,7 +197,6 @@
         <div class="assistant-icon" onclick="toggleAssistant()">
             <span class="assistant-emoji">💭</span>
             <div class="pulse-effect"></div>
-            <div class="neon-glow"></div>
         </div>
         
         <div class="assistant-window" id="assistantWindow">
