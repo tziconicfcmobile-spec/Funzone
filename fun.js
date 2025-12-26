@@ -71,6 +71,16 @@ const games = [
         category: "android"
     },
     {
+        id: 50,
+        name: "Hitman (gamehub)",
+        image: "hitman.jpg",
+        description: "download game la hitman ambalo linachezwa kwenye PC na pia kwenye simu kwa kutumia emulator ya gamehub",
+        downloadLink: "https://buzzheavier.com/az9idxyg840b",
+        type: "free",
+        pinRequired: false,
+        category: "pc"
+    },
+    {
         id: 11,
         name: "DLS 26 Mod FC 26",
         image: "dls.jpg",
@@ -362,9 +372,9 @@ const games = [
     },
     {
         id: 49,
-        name: "blur",
+        name: "blur (winlator)",
         image: "blur.jpg",
-        description: "download game la blur ambalo utacheza kwenye PC yako na pia kwa simu yako kwa kutumia emulator.",
+        description: "download game la blur ambalo utacheza kwenye PC yako na pia kwa simu yako kwa kutumia emulator ya winlator.",
         downloadLink: "https://www.mediafire.com/file/2678sh5ac7c9053/%2540B.lur.zip/file",
         type: "free",
         pinRequired: false,
