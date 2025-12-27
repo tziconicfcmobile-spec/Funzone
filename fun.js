@@ -401,6 +401,16 @@ const games = [
         category: "psp"
     },
     {
+        id: 51,
+        name: "call of duty black ops",
+        image: "ops.jpg",
+        description: "download game la call of duty black ops ambalo linachezwa kwenye PC yako pia kwa simu yako kwa kutumia winlator emulator",
+        downloadLink: "https://1fichier.com/?8gkxzpp9nwb4esjs0clv",
+        type: "free",
+        pinRequired: false,
+        category: "pc"
+    },
+    {
         id: 21,
         name: "Mortal Kombat Unchained PPSSPP",
         image: "unchained.jpg",
