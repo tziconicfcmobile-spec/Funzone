@@ -431,6 +431,16 @@ const games = [
         category: "android"
     },
     {
+        id: 52,
+        name: "hitman blood money",
+        image: "hit2.jpg",
+        description: "Download game la hitman blood money for free and play it on your mobile phone",
+        downloadLink: "https://dl.apkvision.org/hitman-blood-money-reprisal/hitman-bmr-v1.2RC13-apkvision.apks",
+        type: "free",
+        pinRequired: false,
+        category: "android"
+    },
+    {
         id: 39,
         name: "Aerofly FS Global",
         image: "aerofly.jpg",
