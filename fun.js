@@ -111,6 +111,16 @@ const games = [
         category: "android"
     },
     {
+        id: 54,
+        name: "once human",
+        image: "once.jpg",
+        description: "Download game la once human Lina story Kali sana",
+        downloadLink: "https://dl.apkvision.org/once-human/Once%20Human_1.0.22_apkvision.xapk",
+        type: "free",
+        pinRequired: false,
+        category: "android"
+    },
+    {
         id: 9,
         name: "God Hand",
         image: "hand.jpg",
