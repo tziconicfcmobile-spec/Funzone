@@ -461,6 +461,16 @@ const games = [
         category: "android"
     },
     {
+        id: 53,
+        name: "forgotten memories remastered apk",
+        image: "fog.jpg",
+        description: "download game la forgotten memories remastered apk mod patched",
+        downloadLink: "https://dl.apkvision.org/forgotten-memories-remastered/Forgotten-Memories-RE-v1.9.102-full-no-more-deer-apkvision.apk",
+        type: "free",
+        pinRequired: false,
+        category: "android"
+    },
+    {
         id: 37,
         name: "Days After: Zombie Survival",
         image: "days.jpg",
